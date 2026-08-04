@@ -1,0 +1,158 @@
+name: Estate Law Aid production qualification
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: estate-law-aid-v1189-qualification
+  cancel-in-progress: false
+
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out exact repository head
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+
+      - name: Set up Node 22
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
+        with:
+          node-version: '22.x'
+          package-manager-cache: false
+
+      - name: Verify exact runtime inventory and source binding
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected_source_sha="a422481365008549d509c6945c30b987934622f9bad5a14c56c941ea776a5d29"
+          test ! -f estate-law-aid-v1.1.89-render-runtime.zip
+          test "$(node -p "require('./package.json').version")" = "1.1.89"
+          node -e "const r=require('./SOURCE_ARTIFACT_BINDING.json');if(r.version!=='1.1.89'||r.sourceArtifactSha256!=='$expected_source_sha')process.exit(1)"
+          test "$(find . -path './.git' -prune -o -path './.github' -prune -o -type f -print | wc -l | tr -d ' ')" = "1631"
+          test "$(find . -path './.git' -prune -o -path './.github' -prune -o -type f -name '*.html' -print | wc -l | tr -d ' ')" = "1381"
+          test -f index.html
+          test -f server.js
+          test -f render.yaml
+          test -f sitemap.xml
+          test -f assets/app.js
+          test -f find-a-professional/index.html
+          node --check server.js
+          grep -q "estatelawaid.com" server.js
+          grep -q "$expected_source_sha" server.js
+          grep -q "968 profiles" find-a-professional/index.html
+          test -z "$(find . -path './.git' -prune -o -type f -size +100M -print -quit)"
+
+      - name: Validate Render contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q '^  - type: web$' render.yaml
+          grep -q '^    name: estate-law-aid$' render.yaml
+          grep -q '^    runtime: node$' render.yaml
+          grep -q '^    buildCommand: npm install --ignore-scripts --omit=dev$' render.yaml
+          grep -q '^    startCommand: node server.js$' render.yaml
+          grep -q '^    healthCheckPath: /health$' render.yaml
+          grep -q '^    autoDeployTrigger: off$' render.yaml
+          grep -q '^        value: 22.23.1$' render.yaml
+
+      - name: Validate local public references
+        shell: bash
+        run: |
+          set -euo pipefail
+          node - <<'NODE'
+          const fs=require('fs');
+          const path=require('path');
+          const root=process.cwd();
+          const files=[];
+          (function walk(dir){
+            for(const name of fs.readdirSync(dir)){
+              if(name==='.git'||name==='.github') continue;
+              const p=path.join(dir,name), st=fs.statSync(p);
+              st.isDirectory()?walk(p):files.push(p);
+            }
+          })(root);
+          const html=files.filter(f=>f.endsWith('.html'));
+          if(html.length!==1381) throw new Error(`html-count:${html.length}`);
+          const broken=[];
+          const attr=/\b(?:href|src)\s*=\s*["']([^"']+)["']/gi;
+          for(const file of html){
+            const text=fs.readFileSync(file,'utf8');
+            let m;
+            while((m=attr.exec(text))){
+              let ref=m[1].trim();
+              if(!ref||ref.includes('${')||ref.includes('{{')||ref.includes('<%')||ref.startsWith('#')||ref.startsWith('mailto:')||ref.startsWith('tel:')||ref.startsWith('javascript:')||ref.startsWith('data:')||ref.startsWith('http://')||ref.startsWith('https://')||ref.startsWith('//')) continue;
+              ref=ref.split('#')[0].split('?')[0];
+              if(!ref) continue;
+              let target;
+              if(ref.startsWith('/')) target=path.join(root,ref.replace(/^\/+/,''));
+              else target=path.resolve(path.dirname(file),ref);
+              const candidates=[target];
+              if(!path.extname(target)) candidates.push(path.join(target,'index.html'));
+              if(!candidates.some(p=>fs.existsSync(p)&&fs.statSync(p).isFile())) broken.push(`${path.relative(root,file)} -> ${m[1]}`);
+            }
+          }
+          if(broken.length){
+            console.error(broken.slice(0,50).join('\n'));
+            throw new Error(`broken-local-references:${broken.length}`);
+          }
+          console.log(`validated ${html.length} HTML routes and local references`);
+          NODE
+
+      - name: Exercise public runtime and closed-sensitive defaults
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected_source_sha="a422481365008549d509c6945c30b987934622f9bad5a14c56c941ea776a5d29"
+          PORT=8787 node server.js > "$RUNNER_TEMP/server.log" 2>&1 &
+          pid=$!
+          trap 'kill $pid 2>/dev/null || true' EXIT
+          ready=false
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8787/health > "$RUNNER_TEMP/health.json"; then
+              ready=true
+              break
+            fi
+            if ! kill -0 "$pid" 2>/dev/null; then
+              cat "$RUNNER_TEMP/server.log"
+              exit 1
+            fi
+            sleep 1
+          done
+          test "$ready" = true
+          node -e "const h=require(process.env.RUNNER_TEMP+'/health.json');if(!h.ok||h.app!=='Estate Law Aid'||h.version!=='1.1.89'||h.canonicalDomain!=='https://estatelawaid.com'||h.sourceArtifactSha256!=='$expected_source_sha'||h.publicStaticLive!==true||h.sensitiveTrafficApproved!==false||h.liveClaims!==false||h.liveBilling!==false||h.liveUploads!==false||h.externalAi!==false)process.exit(1)"
+
+          curl -fsS http://127.0.0.1:8787/livez > "$RUNNER_TEMP/livez.json"
+          node -e "const h=require(process.env.RUNNER_TEMP+'/livez.json');if(!h.ok||h.status!=='alive'||h.app!=='Estate Law Aid'||h.version!=='1.1.89')process.exit(1)"
+
+          curl -fsS http://127.0.0.1:8787/ > "$RUNNER_TEMP/home.html"
+          grep -qi "Estate Law Aid" "$RUNNER_TEMP/home.html"
+
+          curl -fsS http://127.0.0.1:8787/find-a-professional/ > "$RUNNER_TEMP/professionals.html"
+          grep -q "968 profiles" "$RUNNER_TEMP/professionals.html"
+
+          api_status="$(curl -sS -o "$RUNNER_TEMP/api.json" -w '%{http_code}' http://127.0.0.1:8787/api/ai/estate-intake-readiness)"
+          test "$api_status" = "503"
+          node -e "const h=require(process.env.RUNNER_TEMP+'/api.json');if(h.ok!==false||h.state!=='closed_by_design'||h.version!=='1.1.89')process.exit(1)"
+
+          method_status="$(curl -sS -X POST -o "$RUNNER_TEMP/method.json" -w '%{http_code}' http://127.0.0.1:8787/)"
+          test "$method_status" = "405"
+          node -e "const h=require(process.env.RUNNER_TEMP+'/method.json');if(h.ok!==false||h.error!=='method_not_allowed')process.exit(1)"
+
+          redirect_status="$(curl -sS -H 'Host: www.estatelawaid.com' -o /dev/null -D "$RUNNER_TEMP/redirect.headers" -w '%{http_code}' http://127.0.0.1:8787/test-path?x=1)"
+          test "$redirect_status" = "308"
+          grep -qi '^Location: https://estatelawaid.com/test-path?x=1' "$RUNNER_TEMP/redirect.headers"
+
+          not_found_status="$(curl -sS -o "$RUNNER_TEMP/not-found.html" -w '%{http_code}' http://127.0.0.1:8787/definitely-not-a-route/)"
+          test "$not_found_status" = "404"
+          grep -qi "Page not found" "$RUNNER_TEMP/not-found.html"
+
+          traversal_status="$(curl --path-as-is -sS -o /dev/null -w '%{http_code}' http://127.0.0.1:8787/../../etc/passwd)"
+          test "$traversal_status" = "404"
