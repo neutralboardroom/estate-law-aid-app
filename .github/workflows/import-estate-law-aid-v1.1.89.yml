@@ -55,12 +55,18 @@ jobs:
             PORT=10000 node server.js > "$RUNNER_TEMP/server.log" 2>&1 &
             pid=$!
             trap 'kill $pid 2>/dev/null || true' EXIT
+            ready=false
             for i in $(seq 1 20); do
-              curl -fsS http://127.0.0.1:10000/health > "$RUNNER_TEMP/health.json" && break
+              if curl -fsS http://127.0.0.1:10000/health > "$RUNNER_TEMP/health.json"; then
+                ready=true
+                break
+              fi
               sleep 1
             done
+            test "$ready" = true
             node -e "const h=require(process.env.RUNNER_TEMP+'/health.json'); if(!h.ok||h.version!=='1.1.89'||h.app!=='Estate Law Aid'||h.sensitiveTrafficApproved!==false) process.exit(1)"
-            curl -fsS http://127.0.0.1:10000/ | grep -qi "Estate Law Aid"
+            curl -fsS http://127.0.0.1:10000/ > "$RUNNER_TEMP/home.html"
+            grep -qi "Estate Law Aid" "$RUNNER_TEMP/home.html"
           )
 
           find . -mindepth 1 -maxdepth 1 \
