@@ -1,0 +1,93 @@
+name: Estate Law Aid fast live route audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/live-fast-audit.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: estate-law-aid-live-fast-audit
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Cache-bypassed read-only live audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import concurrent.futures, datetime, hashlib, html.parser, json, os, re, urllib.error, urllib.parse, urllib.request
+          BASE='https://estatelawaid.com'
+          STAMP=str(int(datetime.datetime.now(datetime.timezone.utc).timestamp()))
+          HEADERS={'Cache-Control':'no-cache, no-store, max-age=0','Pragma':'no-cache','User-Agent':'EstateLawAid-FastLiveAudit/1.0'}
+          def bust(url):
+              p=urllib.parse.urlsplit(url);q=urllib.parse.parse_qsl(p.query,keep_blank_values=True);q.append(('__ela_audit',STAMP));return urllib.parse.urlunsplit((p.scheme,p.netloc,p.path,urllib.parse.urlencode(q),p.fragment))
+          def fetch(url,method='GET'):
+              req=urllib.request.Request(bust(url),headers=HEADERS,method=method)
+              try:
+                  with urllib.request.urlopen(req,timeout=25) as r:return {'url':url,'finalUrl':r.url,'status':r.status,'headers':dict(r.headers),'body':r.read() if method=='GET' else b''}
+              except urllib.error.HTTPError as e:return {'url':url,'finalUrl':e.url,'status':e.code,'headers':dict(e.headers),'body':e.read() if method=='GET' else b'','error':str(e)}
+              except Exception as e:return {'url':url,'finalUrl':url,'status':0,'headers':{},'body':b'','error':repr(e)}
+          health=fetch(BASE+'/health');livez=fetch(BASE+'/livez');api=fetch(BASE+'/api/ai/estate-intake-readiness');site=fetch(BASE+'/sitemap.xml')
+          text=site['body'].decode('utf-8','replace');urls=sorted(set(re.findall(r'<loc>([^<]+)</loc>',text)))
+          class P(html.parser.HTMLParser):
+              def __init__(self):super().__init__();self.title=[];self.h1=[];self._in_title=False;self._h1=False;self.viewport=False;self.buttons=0;self.links=0
+              def handle_starttag(self,t,a):
+                  d=dict(a);t=t.lower()
+                  if t=='title':self._in_title=True
+                  if t=='h1':self._h1=True
+                  if t=='meta' and d.get('name','').lower()=='viewport':self.viewport=True
+                  if t=='button':self.buttons+=1
+                  if t=='a':self.links+=1
+              def handle_endtag(self,t):
+                  if t.lower()=='title':self._in_title=False
+                  if t.lower()=='h1':self._h1=False
+              def handle_data(self,d):
+                  if self._in_title:self.title.append(d)
+                  if self._h1:self.h1.append(d)
+          def audit(url):
+              r=fetch(url);body=r.pop('body');r['bytes']=len(body);r['sha256']=hashlib.sha256(body).hexdigest();r['cacheControl']=r['headers'].get('Cache-Control') or r['headers'].get('cache-control')
+              if r['status']==200 and b'<html' in body[:2000].lower():
+                  p=P();p.feed(body.decode('utf-8','replace'));r.update({'title':' '.join(''.join(p.title).split()),'h1':' '.join(''.join(p.h1).split()),'viewport':p.viewport,'buttons':p.buttons,'links':p.links})
+              return r
+          with concurrent.futures.ThreadPoolExecutor(max_workers=32) as ex:routes=list(ex.map(audit,urls))
+          counts={}
+          for r in routes:counts[str(r['status'])]=counts.get(str(r['status']),0)+1
+          out={'base':BASE,'completedUtc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'cacheBypass':STAMP,'health':{**health,'body':health['body'].decode('utf-8','replace')},'livez':{**livez,'body':livez['body'].decode('utf-8','replace')},'api':{**api,'body':api['body'].decode('utf-8','replace')},'sitemapStatus':site['status'],'sitemapUrls':len(urls),'statusCounts':counts,'routes':routes,'summary':{'non200':sum(r['status']!=200 for r in routes),'missingTitle':sum(not r.get('title') for r in routes),'missingH1':sum(not r.get('h1') for r in routes),'missingViewport':sum(not r.get('viewport') for r in routes),'zeroByte':sum(r.get('bytes',0)==0 for r in routes)}}
+          os.makedirs('audit-output-fast',exist_ok=True)
+          open('audit-output-fast/live-fast-audit.json','w').write(json.dumps(out,indent=2))
+          hbody=out['health']['body'];version='unknown'
+          try:version=json.loads(hbody).get('version','unknown')
+          except:pass
+          lines=['# Estate Law Aid fast live audit','',f"Completed UTC: {out['completedUtc']}",f"Live health version: {version}",f"Sitemap URLs: {len(urls)}",f"HTTP status counts: {counts}",f"Non-200 routes: {out['summary']['non200']}",f"Missing titles: {out['summary']['missingTitle']}",f"Missing H1: {out['summary']['missingH1']}",f"Missing viewport: {out['summary']['missingViewport']}",f"API probe status: {out['api']['status']}",'','## Non-200 routes']+[f"- {r['status']} {r['url']}" for r in routes if r['status']!=200]
+          open('audit-output-fast/live-fast-audit.md','w').write('\n'.join(lines))
+          print(json.dumps({'version':version,'sitemapUrls':len(urls),'statusCounts':counts,**out['summary']},indent=2))
+          PY
+
+      - name: Publish exact fast-audit evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp -R audit-output-fast "$RUNNER_TEMP/ela-fast-output"
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git checkout --orphan audit-results/live-fast-2026-08-04
+          git rm -rf .
+          cp -R "$RUNNER_TEMP/ela-fast-output" ./audit-output-fast
+          printf '%s\n' "source_repository_commit=${GITHUB_SHA}" "completed_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)" > AUDIT_SOURCE.txt
+          git add audit-output-fast AUDIT_SOURCE.txt
+          git commit -m "Publish fast cache-bypassed live audit"
+          git push --force origin HEAD:refs/heads/audit-results/live-fast-2026-08-04
