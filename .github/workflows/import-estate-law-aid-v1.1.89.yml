@@ -3,8 +3,7 @@ name: Import exact Estate Law Aid v1.1.89 runtime
 on:
   push:
     branches: [main]
-    paths:
-      - estate-law-aid-v1.1.89-render-runtime.zip
+  workflow_dispatch:
 
 permissions:
   contents: write
