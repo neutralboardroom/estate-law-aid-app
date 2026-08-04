@@ -1,0 +1,92 @@
+name: Estate Law Aid live uncached user audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/live-user-audit.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: estate-law-aid-live-user-audit
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Check out exact repository head
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Publish isolated running marker
+        shell: bash
+        run: |
+          set -euo pipefail
+          status_dir="$RUNNER_TEMP/ela-live-audit-status"
+          git worktree add --detach "$status_dir" HEAD
+          cd "$status_dir"
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git checkout --orphan audit-status/live-full-2026-08-04
+          git rm -rf .
+          printf '%s\n' "state=RUNNING" "source_repository_commit=${GITHUB_SHA}" "started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)" > AUDIT_STATUS.txt
+          git add AUDIT_STATUS.txt
+          git commit -m "Mark uncached live audit running"
+          git push --force origin HEAD:refs/heads/audit-status/live-full-2026-08-04
+
+      - name: Set up Node 22
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
+        with:
+          node-version: '22.x'
+          package-manager-cache: false
+
+      - name: Install isolated Playwright dependency
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/ela-live-audit"
+          cd "$RUNNER_TEMP/ela-live-audit"
+          npm init -y >/dev/null
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+          curl -fsSLo live-user-audit.mjs https://raw.githubusercontent.com/neutralboardroom/estate-law-aid-app/370fee720515173a4ab5c97db6677b5d0836e7bb/.audit/live-user-audit.mjs
+
+      - name: Run read-only cache-bypassed production audit
+        shell: bash
+        env:
+          AUDIT_BASE_URL: https://estatelawaid.com
+        run: |
+          set -euo pipefail
+          NODE_PATH="$RUNNER_TEMP/ela-live-audit/node_modules" node "$RUNNER_TEMP/ela-live-audit/live-user-audit.mjs"
+
+      - name: Upload exact audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: estate-law-aid-live-user-audit
+          path: audit-output/
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Publish exact evidence to isolated results branch
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp -R audit-output "$RUNNER_TEMP/estate-law-aid-live-audit-output"
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git checkout --orphan audit-results/live-full-2026-08-04
+          git rm -rf .
+          cp -R "$RUNNER_TEMP/estate-law-aid-live-audit-output" ./audit-output
+          printf '%s\n' "source_repository_commit=${GITHUB_SHA}" "completed_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)" > AUDIT_SOURCE.txt
+          git add audit-output AUDIT_SOURCE.txt
+          git commit -m "Publish uncached live user audit evidence"
+          git push --force origin HEAD:refs/heads/audit-results/live-full-2026-08-04
