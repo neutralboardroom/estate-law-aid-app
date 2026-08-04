@@ -23,6 +23,22 @@ jobs:
           fetch-depth: 0
           persist-credentials: true
 
+      - name: Publish isolated running marker
+        shell: bash
+        run: |
+          set -euo pipefail
+          status_dir="$RUNNER_TEMP/ela-live-audit-status"
+          git worktree add --detach "$status_dir" HEAD
+          cd "$status_dir"
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git checkout --orphan audit-status/live-full-2026-08-04
+          git rm -rf .
+          printf '%s\n' "state=RUNNING" "source_audit_commit=${GITHUB_SHA}" "started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)" > AUDIT_STATUS.txt
+          git add AUDIT_STATUS.txt
+          git commit -m "Mark uncached live audit running"
+          git push --force origin HEAD:refs/heads/audit-status/live-full-2026-08-04
+
       - name: Set up Node 22
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
         with:
