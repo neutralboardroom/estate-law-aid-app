@@ -15,6 +15,7 @@ concurrency:
 jobs:
   import-exact-runtime:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -27,28 +28,37 @@ jobs:
         run: |
           set -euo pipefail
           archive="estate-law-aid-v1.1.89-render-runtime.zip"
-          expected="60c296a63cd976f42b458fa6050a2817109a320571545e508ef00ce50735f45f"
+          expected_archive_sha="60c296a63cd976f42b458fa6050a2817109a320571545e508ef00ce50735f45f"
+          expected_source_sha="a422481365008549d509c6945c30b987934622f9bad5a14c56c941ea776a5d29"
 
           if [ ! -f "$archive" ]; then
-            echo "No transport archive remains; import is already complete or not yet uploaded."
+            test -f package.json
+            test "$(node -p "require('./package.json').version")" = "1.1.89"
+            echo "Exact runtime is already imported; no transport archive remains."
             exit 0
           fi
 
-          actual="$(sha256sum "$archive" | awk '{print $1}')"
-          test "$actual" = "$expected"
+          actual_archive_sha="$(sha256sum "$archive" | awk '{print $1}')"
+          test "$actual_archive_sha" = "$expected_archive_sha"
 
           stage="$RUNNER_TEMP/estate-law-aid-v1.1.89"
           rm -rf "$stage"
           mkdir -p "$stage"
           unzip -q "$archive" -d "$stage"
 
+          test "$(find "$stage" -type f | wc -l | tr -d ' ')" = "1632"
+          test "$(find "$stage" -type f -name '*.html' | wc -l | tr -d ' ')" = "1381"
           test "$(node -p "require('$stage/package.json').version")" = "1.1.89"
+          node -e "const r=require('$stage/SOURCE_ARTIFACT_BINDING.json');if(r.version!=='1.1.89'||r.sourceArtifactSha256!=='$expected_source_sha')process.exit(1)"
           test -f "$stage/server.js"
           test -f "$stage/index.html"
           test -f "$stage/render.yaml"
+          test -f "$stage/find-a-professional/index.html"
+          test -f "$stage/.github/workflows/qualify-production.yml"
           node --check "$stage/server.js"
           grep -q "estatelawaid.com" "$stage/server.js"
-          grep -q "a422481365008549d509c6945c30b987934622f9bad5a14c56c941ea776a5d29" "$stage/server.js"
+          grep -q "$expected_source_sha" "$stage/server.js"
+          test -z "$(find "$stage" -type f -size +100M -print -quit)"
 
           (
             cd "$stage"
@@ -56,17 +66,32 @@ jobs:
             pid=$!
             trap 'kill $pid 2>/dev/null || true' EXIT
             ready=false
-            for i in $(seq 1 20); do
+            for i in $(seq 1 30); do
               if curl -fsS http://127.0.0.1:10000/health > "$RUNNER_TEMP/health.json"; then
                 ready=true
                 break
               fi
+              if ! kill -0 "$pid" 2>/dev/null; then
+                cat "$RUNNER_TEMP/server.log"
+                exit 1
+              fi
               sleep 1
             done
             test "$ready" = true
-            node -e "const h=require(process.env.RUNNER_TEMP+'/health.json'); if(!h.ok||h.version!=='1.1.89'||h.app!=='Estate Law Aid'||h.sensitiveTrafficApproved!==false) process.exit(1)"
+            node -e "const h=require(process.env.RUNNER_TEMP+'/health.json');if(!h.ok||h.app!=='Estate Law Aid'||h.version!=='1.1.89'||h.canonicalDomain!=='https://estatelawaid.com'||h.sourceArtifactSha256!=='$expected_source_sha'||h.sensitiveTrafficApproved!==false||h.liveClaims!==false||h.liveBilling!==false||h.liveUploads!==false||h.externalAi!==false)process.exit(1)"
+
+            curl -fsS http://127.0.0.1:10000/livez > "$RUNNER_TEMP/livez.json"
+            node -e "const h=require(process.env.RUNNER_TEMP+'/livez.json');if(!h.ok||h.status!=='alive'||h.app!=='Estate Law Aid'||h.version!=='1.1.89')process.exit(1)"
+
             curl -fsS http://127.0.0.1:10000/ > "$RUNNER_TEMP/home.html"
             grep -qi "Estate Law Aid" "$RUNNER_TEMP/home.html"
+
+            curl -fsS http://127.0.0.1:10000/find-a-professional/ > "$RUNNER_TEMP/professionals.html"
+            grep -q "968 profiles" "$RUNNER_TEMP/professionals.html"
+
+            api_status="$(curl -sS -o "$RUNNER_TEMP/api.json" -w '%{http_code}' http://127.0.0.1:10000/api/ai/estate-intake-readiness)"
+            test "$api_status" = "503"
+            node -e "const h=require(process.env.RUNNER_TEMP+'/api.json');if(h.ok!==false||h.state!=='closed_by_design'||h.version!=='1.1.89')process.exit(1)"
           )
 
           find . -mindepth 1 -maxdepth 1 \
@@ -74,11 +99,34 @@ jobs:
             ! -name .github \
             ! -name "$archive" \
             -exec rm -rf {} +
-          cp -a "$stage"/. .
+
+          find "$stage" -mindepth 1 -maxdepth 1 \
+            ! -name .github \
+            -exec cp -a {} . \;
           rm -f "$archive"
+
+          test -f package.json
+          test "$(node -p "require('./package.json').version")" = "1.1.89"
+          test -f server.js
+          test -f index.html
+          test -f render.yaml
+          test -f SOURCE_ARTIFACT_BINDING.json
+          test ! -f "$archive"
+          test ! -f .github/workflows/qualify-production.yml
+          test "$(find . -path './.git' -prune -o -path './.github' -prune -o -type f -print | wc -l | tr -d ' ')" = "1631"
+          test "$(find . -path './.git' -prune -o -path './.github' -prune -o -type f -name '*.html' -print | wc -l | tr -d ' ')" = "1381"
+          test -z "$(find . -path './.git' -prune -o -type f -size +100M -print -quit)"
 
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add -A
+          if git diff --cached --quiet; then
+            echo "No import changes were staged."
+            exit 0
+          fi
+          if git diff --cached --name-only | grep -q '^\.github/'; then
+            echo "Refusing to modify workflow files from inside GitHub Actions."
+            exit 1
+          fi
           git commit -m "Import exact Estate Law Aid v1.1.89 production runtime"
           git push origin HEAD:main
