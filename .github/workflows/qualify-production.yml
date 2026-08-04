@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: estate-law-aid-v1189-qualification
@@ -20,7 +20,8 @@ jobs:
       - name: Check out exact repository head
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
-          persist-credentials: false
+          fetch-depth: 0
+          persist-credentials: true
 
       - name: Set up Node 22
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
@@ -156,3 +157,13 @@ jobs:
 
           traversal_status="$(curl --path-as-is -sS -o /dev/null -w '%{http_code}' http://127.0.0.1:8787/../../etc/passwd)"
           test "$traversal_status" = "404"
+
+      - name: Publish exact qualification ref
+        if: github.ref == 'refs/heads/main'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          qualified_ref="qualified/v1.1.89/${GITHUB_SHA}"
+          git push origin "HEAD:refs/heads/${qualified_ref}"
