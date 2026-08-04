@@ -6,11 +6,11 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: estate-law-aid-live-user-audit
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   audit:
@@ -20,7 +20,8 @@ jobs:
       - name: Check out audit branch
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
-          persist-credentials: false
+          fetch-depth: 0
+          persist-credentials: true
 
       - name: Set up Node 22
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
@@ -56,3 +57,19 @@ jobs:
           path: audit-output/
           if-no-files-found: warn
           retention-days: 30
+
+      - name: Publish evidence to isolated results branch
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp -R audit-output "$RUNNER_TEMP/estate-law-aid-live-audit-output"
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git checkout --orphan audit-results/live-full-2026-08-04
+          git rm -rf .
+          cp -R "$RUNNER_TEMP/estate-law-aid-live-audit-output" ./audit-output
+          printf '%s\n' "source_audit_commit=${GITHUB_SHA}" "completed_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)" > AUDIT_SOURCE.txt
+          git add audit-output AUDIT_SOURCE.txt
+          git commit -m "Publish uncached live user audit evidence"
+          git push --force origin HEAD:refs/heads/audit-results/live-full-2026-08-04
