@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: estate-law-aid
+    runtime: node
+    plan: starter
+    region: ohio
+    buildCommand: npm install --ignore-scripts --omit=dev
+    startCommand: node server.js
+    healthCheckPath: /health
+    autoDeployTrigger: off
+    envVars:
+      - key: NODE_VERSION
+        value: 22.23.1

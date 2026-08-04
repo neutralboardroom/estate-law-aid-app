@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="noindex,nofollow" name="robots"/>
+<title>Paid Customer Start | Estate Law Aid</title>
+<meta content="Real-user customer start flow for account creation, state selection, draft/service selection, payment, uploads, AI organization, and optional attorney review." name="description"/>
+
+<link href="https://estatelawaid.com/paid-customer-start/" rel="canonical"/>
+<link href="/assets/styles.css" rel="stylesheet"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png?v=1139"><link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png?v=1139"><link rel="manifest" href="/site.webmanifest?v=1139"><meta name="theme-color" content="#17324d"></head>
+<body class="ela-v1111 ela-v1117 ela-v1119 ela-v1121 ela-v1122 ela-v1123 ela-v1124 ela-v1127 ela-v1128 ela-v1129 ela-v1130 ela-v1131 ela-v1132 ela-v1133 ela-v1139">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header public-header internal-shell">
+<a aria-label="Estate Law Aid home" class="brand brand-text" href="/"><img class="brand-logo" src="/assets/brand/estate-law-aid-logo.svg" alt="Estate Law Aid"></a>
+<button aria-expanded="false" aria-label="Open menu" class="menu-toggle" type="button">Menu</button>
+<nav aria-label="Workspace navigation" class="nav"><a href="/my-dashboard/">My Dashboard</a><a href="/my-documents/">My Documents</a><a href="/work-vault/">Work Vault</a><a href="/role-account-dashboard/">Role Dashboard</a><a href="/secure-messages/">Messages</a><a href="/">Public Home</a></nav>
+</header>
+<main id="main">
+<section class="hero compact-hero"><div class="hero-copy"><p class="eyebrow">Customer paid start • platform services only</p><h1>Start, save, pay, and keep everything organized.</h1><p class="hero-text">A customer can create an account, choose a NY/NJ starting path, save a named matter, select a platform service, pay through checkout when configured, upload copies, download drafts, and request optional review add-ons.</p></div></section>
+<section class="section"><form class="content-card" id="paidStartForm"><h2>Create a paid-start record</h2><div class="form-grid"><label>Email<input name="email" placeholder="customer@example.com" type="email"/></label><label>Name<input name="name" placeholder="Customer name"/></label><label>State<select name="state"><option value="NY">New York</option><option value="NJ">New Jersey</option></select></label><label>County<input name="county" placeholder="County"/></label><label>Service<select name="serviceCode"><option value="free_start">Free starting point</option><option value="draft_builder">Draft Builder Platform Service</option><option value="staff_organization_review">Staff Organization Review</option><option value="paralegal_prep_review">Paralegal Preparation Review</option><option value="attorney_review_one_draft">Attorney Review of One Draft</option><option value="full_estate_package_review">Attorney Review of Full Estate Package</option></select></label><label>Referral code<input name="referralCode" placeholder="EHD-PARTNER-123"/></label></div><label>Question / goal<textarea data-counter="paidStartCounter" maxlength="2500" name="question" placeholder="Tell us what the customer wants to accomplish."></textarea><small id="paidStartCounter">0 / 2500</small></label><label><input name="serviceAcknowledged" required="" type="checkbox"/> Customer understands this is not legal advice and attorney fees, if any, are separate.</label><button class="btn primary" type="submit">Create Paid-Start Record</button><pre class="api-output" id="paidStartOutput"></pre></form></section>
+<script>document.getElementById('paidStartForm')?.addEventListener('submit', async e=>{e.preventDefault();const fd=new FormData(e.target);const data=Object.fromEntries(fd.entries());data.serviceAcknowledged=fd.has('serviceAcknowledged');const out=document.getElementById('paidStartOutput');out.textContent='Creating...';try{const r=await fetch('/api/customer/paid-start',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});out.textContent=JSON.stringify(await r.json(),null,2)}catch(err){out.textContent='This action could not be completed here. '+err.message}})</script>
+</main>
+<footer class="site-footer internal-footer">
+<div class="footer-brand footer-wordmark"><img class="footer-logo" src="/assets/brand/estate-law-aid-logo.svg" alt="Estate Law Aid"><span>Plan. Protect. Prepare.</span></div>
+<div class="footer-links"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/disclaimer/">Disclaimer</a><a href="/trust-and-safety/">Trust &amp; Safety</a></div>
+<div class="footer-note">Account or role-based workspace. Private pages require secure sign-in before real use. Workflow status does not create an attorney-client relationship or make a document final.</div>
+</footer>
+<script src="/assets/app.js"></script>
+<script src="/assets/language-control-v1153.js?v=1153"></script></body>
+</html>

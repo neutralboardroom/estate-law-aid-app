@@ -1,0 +1,131 @@
+{
+  "schema": "ela-current-truth-v3",
+  "version": "1.1.89",
+  "asOf": "2026-08-04T11:34:00-04:00",
+  "product": "Estate Law Aid",
+  "releaseType": "bounded_material_public_directory_single_runtime_and_state_qualified_area_filter",
+  "base": {
+    "filename": "estate-law-aid-v1.1.88.zip",
+    "version": "1.1.88",
+    "sha256": "ffb5648427997159e7ad9b842eb7c33e268f78097d4735288492fa00d8a4a757",
+    "sizeBytes": 48782020,
+    "canonicalTreeDigest": "08044e71556cd02e775494c95fac65ea339633232476d2b91255c5a505808408",
+    "fileInventorySha256": "b0a76a9e51c036c611f85d5750d87bb4555fc6ad8178271acfac3bd41f403f9e",
+    "releasePayloadInventorySha256": "5838c3537a0fe79e60d2796c90f4b3ac006a2d58df3fbf16a6a6c928b846f67d"
+  },
+  "rollback": {
+    "filename": "estate-law-aid-v1.1.88.zip",
+    "version": "1.1.88",
+    "sha256": "ffb5648427997159e7ad9b842eb7c33e268f78097d4735288492fa00d8a4a757",
+    "sizeBytes": 48782020,
+    "canonicalTreeDigest": "08044e71556cd02e775494c95fac65ea339633232476d2b91255c5a505808408",
+    "fileInventorySha256": "b0a76a9e51c036c611f85d5750d87bb4555fc6ad8178271acfac3bd41f403f9e",
+    "releasePayloadInventorySha256": "5838c3537a0fe79e60d2796c90f4b3ac006a2d58df3fbf16a6a6c928b846f67d"
+  },
+  "counts": {
+    "profiles": 968,
+    "attorneys": 621,
+    "firms": 347,
+    "relationships": 594,
+    "offices": 398,
+    "routes": 1381,
+    "indexableRoutes": 1132,
+    "noindexRoutes": 249
+  },
+  "currentness": {
+    "fresh": 464,
+    "watch": 504,
+    "stale": 0
+  },
+  "packId": "SJP-2026-08-02-C15-P37-D11-V13",
+  "oneStepPacket": {
+    "packetId": "SJP-LMP-UNIVERSAL-ONE-STEP-2026-08-03-V14-ALL-CHAT-MODES",
+    "sha256": "fce42ce0927748f94189692ef5b3bf8e0fe9f8d12273287f03a68eb7bccdad6f",
+    "entries": 70,
+    "effectiveTime": "2026-08-03T13:11:00-04:00"
+  },
+  "openAiLaunchOverlay": {
+    "batchId": "SJP-OPENAI-LIVE-2026-08-03-BATCH-02",
+    "sha256": "a1d63886e22188304cff36df8ed5754169546c24fe094a4563c6c4184a6e63f4",
+    "status": "CURRENT_OWNER_AUTHORIZATION_PRESERVED_INSIDE_V14"
+  },
+  "durableRules": {
+    "baseline": "DRB-2026-08-02-DUR001-DUR086-V13",
+    "master": 86,
+    "owner": 70,
+    "builder": 70,
+    "sharedTotal": 226,
+    "openExceptions": 0
+  },
+  "v14": {
+    "mode": "EXISTING_CHAT_PACKET_ONLY",
+    "artifactBindingReceipt": "ARTIFACT_BINDING_AND_MODE_RECEIPT.json",
+    "nonSelfReferentialReceipt": true,
+    "unifiedLiveOperations": "data/unified_live_operations_v1189.json"
+  },
+  "capabilityGates": {
+    "profileInventory": "preserved_968_unclaimed",
+    "publicDirectoryInventoryParity": "exact_three_surface_runtime_parity",
+    "singleAuthoritativeDirectoryRenderer": true,
+    "retiredDuplicateRendererDisabled": true,
+    "publicJurisdictionFilter": "state_and_license_field_matching",
+    "jurisdictionMatches": {
+      "New York": 816,
+      "New Jersey": 175,
+      "Connecticut": 93,
+      "Pennsylvania": 3,
+      "Massachusetts": 5
+    },
+    "multiJurisdictionProfiles": 113,
+    "profilesWithoutJurisdictionMatch": 0,
+    "stateQualifiedMiddlesexFilters": {
+      "New Jersey": 1,
+      "Connecticut": 2
+    },
+    "newFirmProfilesAccepted": 0,
+    "individualCandidatesHeldForOca": 10,
+    "estateAiIntakeReadiness": "tested_dark_not_deployed",
+    "centralAiGateway": "contract_ready_not_connected",
+    "neutralBoardroomBilling": "contract_ready_not_connected",
+    "directPortalProviderClients": false,
+    "portalOpenAiKey": false,
+    "otherAiVendors": false,
+    "documentAi": "closed_by_design",
+    "productionDeployment": false,
+    "billing": false,
+    "filing": false
+  },
+  "deploymentTruth": {
+    "productReadinessState": "DEPLOYMENT_QUALIFIED",
+    "launchState": "QUALIFIED_NOT_AUTHORIZED",
+    "deployCommandReceived": false,
+    "productionEvidence": false,
+    "externalFactState": "CURRENT_EXTERNAL_FACT_UNVERIFIED"
+  },
+  "aiTruth": {
+    "decision": "CONDITIONAL_GO",
+    "toolMaturity": "TESTED",
+    "featureFlag": "off",
+    "controlledLiveSmoke": false,
+    "stabilized": false,
+    "deterministicFallback": true
+  },
+  "releaseIdentity": {
+    "startingArtifactSha256": "ffb5648427997159e7ad9b842eb7c33e268f78097d4735288492fa00d8a4a757",
+    "releasePayloadInventory": "GENERATED_DURING_FINAL_PACKAGING",
+    "sourceCommitIdentity": "UNPROVEN",
+    "deploymentIdentity": "UNPROVEN",
+    "finalDeliveryZipIdentity": "REPORTED_AFTER_PACKAGING"
+  },
+  "localAcceptance": "FROZEN_SOURCE_TREE_AND_REAL_RUNTIME_BROWSER_ACCEPTED_PENDING_FINAL_ARCHIVE_AND_FRESH_EXTRACTIONS",
+  "liveGates": {
+    "deployment": false,
+    "postDeploymentVerification": false,
+    "continuedLiveAcceptance": false,
+    "d4": false,
+    "d5": false
+  },
+  "testEvidence": "data/release_test_results_v1189.json",
+  "sourceTreeTestsPassed": true,
+  "ownerReceipt": "OWNER_RECEIPT.txt"
+}

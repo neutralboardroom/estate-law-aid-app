@@ -1,0 +1,19 @@
+{
+  "schema": "ela-launch-completion-v4",
+  "version": "1.1.89",
+  "asOf": "2026-08-04T11:34:00-04:00",
+  "productReadinessState": "DEPLOYMENT_QUALIFIED",
+  "launchState": "QUALIFIED_NOT_AUTHORIZED",
+  "productionDeployment": false,
+  "counts": {
+    "profiles": 968,
+    "attorneys": 621,
+    "firms": 347,
+    "relationships": 594,
+    "offices": 398,
+    "routes": 1381,
+    "indexableRoutes": 1132,
+    "noindexRoutes": 249
+  },
+  "decision": "CONDITIONAL_GO"
+}

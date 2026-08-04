@@ -1,0 +1,79 @@
+{
+  "schema": "estate-law-aid-professional-membership-truth",
+  "version": "1.1.66",
+  "asOf": "2026-07-31T21:20:00-04:00",
+  "centralAuthority": "Smarter Justice",
+  "portalBillingAuthority": false,
+  "ownerDecisionReceiptId": "DEC-ELA-MEMBERSHIP-TEST-7D467B6F6C",
+  "pricing": {
+    "currency": "USD",
+    "billingPeriod": "month",
+    "individualAttorneyProfileCents": 1500,
+    "claimedFirmProfileCents": 1500,
+    "coveredAttorneySeatCents": 1500,
+    "oneActivePayerPerCoveredAttorneySeat": true,
+    "duplicateSeatChargeProhibited": true
+  },
+  "freeRights": [
+    "basic factual claim or claim preparation",
+    "identity and authority review preparation",
+    "factual correction",
+    "suppression",
+    "removal",
+    "approved factual editing"
+  ],
+  "paidMembershipBoundary": "Enhanced claimed-profile participation and threshold eligibility only after all central Tier B/C and opportunity gates pass.",
+  "noGuarantees": [
+    "clients",
+    "leads",
+    "matters",
+    "consultations",
+    "revenue",
+    "ranking",
+    "exclusivity",
+    "territory",
+    "representation",
+    "outcomes"
+  ],
+  "testPreparationApproved": true,
+  "publicDemonstrationApproved": true,
+  "liveCheckout": false,
+  "billing": false,
+  "subscriptions": false,
+  "entitlements": false,
+  "opportunities": false,
+  "D4": false,
+  "D5": false,
+  "deployment": false,
+  "liveAccepted": false,
+  "centralPaths": {
+    "claim": "https://smarterjustice.com/professional-signup.html?portal=estate-law-aid&mode=claim",
+    "create": "https://smarterjustice.com/professional-signup.html?portal=estate-law-aid&mode=create",
+    "manage": "https://smarterjustice.com/professional-dashboard.html?portal=estate-law-aid"
+  },
+  "truth": "The $15 structure is approved for portal preparation, attorney demonstration, and test acceptance. It does not authorize live checkout or opportunity delivery.",
+  "individualAttorneyMonthlyUSD": 15,
+  "firmProfileMonthlyUSD": 15,
+  "coveredAttorneySeatMonthlyUSD": 15,
+  "basicClaimCorrectionFree": true,
+  "singleActivePayerPerCoveredAttorney": true,
+  "commercialTermsProjection": "data/commercial_terms_projection_v1166.json",
+  "commercialManifestAuthorityState": "PENDING_CANONICAL_CENTRAL_MANIFEST_RECEIPT",
+  "participationStateModel": "data/profile_participation_states_v1166.json",
+  "claimedMemberSeparation": {
+    "claimedBasicFactualControlIsFree": true,
+    "memberActivePaidIsSeparate": true,
+    "membershipLapsePreservesFactualControl": true,
+    "publicLabels": [
+      "CLAIMED — BASIC FACTUAL CONTROL",
+      "MEMBER — ACTIVE PAID PROFESSIONAL MEMBERSHIP"
+    ]
+  },
+  "seatTransferControl": {
+    "oneActivePayerPerCoveredAttorney": true,
+    "noOverlappingSeatCharge": true,
+    "noUnreceiptedEntitlementGap": true,
+    "prorationOrCreditMustBeDefinedBeforeLive": true,
+    "liveTransfer": false
+  }
+}

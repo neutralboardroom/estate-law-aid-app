@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="index,follow" name="robots"/>
+<title>Ask a Question or Reference a Document | Estate Law Aid</title>
+<meta content="Ask an estate planning or probate question, describe a document, or save a file name and type locally without uploading file contents." name="description"/>
+
+<link href="https://estatelawaid.com/ask-question/" rel="canonical"/>
+<link href="/assets/styles.css" rel="stylesheet"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png?v=1139"><link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png?v=1139"><link rel="manifest" href="/site.webmanifest?v=1139"><meta name="theme-color" content="#17324d"></head>
+<body class="ela-v1111 ela-v1117 ela-v1119 ela-v1121 ela-v1122 ela-v1123 ela-v1124 ela-v1127 ela-v1128 ela-v1129 ela-v1130 ela-v1131 ela-v1132 ela-v1133 ela-v1139">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header public-header">
+<a aria-label="Estate Law Aid home" class="brand brand-text" href="/"><img class="brand-logo" src="/assets/brand/estate-law-aid-logo.svg" alt="Estate Law Aid"></a>
+<button aria-expanded="false" aria-label="Open menu" class="menu-toggle" type="button">Menu</button>
+<nav aria-label="Primary navigation" class="nav"><a href="/">Home</a><a href="/start/">Start Free</a><a href="/wills/">Wills</a><a href="/trusts/">Trusts</a><a href="/probate/">Probate</a><a href="/update-existing-documents/">Update Documents</a><a href="/find-a-professional/">Find a Professional</a><a href="/pricing/">Pricing</a><a href="/how-it-works/">How It Works</a><a href="/account/">Account</a></nav>
+</header>
+<main id="main">
+<section class="page-hero compact">
+<p class="eyebrow">Start at the top • Free device-only question organizer</p>
+<h1>Ask a Question or Reference a Document</h1>
+<p>Describe your estate planning, will, trust, power of attorney, health care directive, probate, executor, trustee, beneficiary, or family-helper question. You can also select a PDF, Word file, text file, scan, or mobile phone picture in this workspace so the file name and type are tracked locally for a future review workflow.</p>
+<div class="page-actions">
+<a class="btn primary" href="#questionBox">Ask or add a file reference</a>
+<a class="btn light" href="/document-builder/">Build printable documents</a>
+</div>
+</section>
+<section class="section notice-section">
+<div class="notice"><strong>Copies only:</strong> Do not upload originals. this workspace tracks the selected file name, type, size, and your description in this browser only. Real encrypted upload, file review, attorney review, payment, and secure storage are not available in this step.</div>
+</section>
+<section class="section form-section" id="questionBox">
+<form class="intake-form question-form" id="estateQuestionForm">
+<div class="form-notice"><strong>Free device-only starting question:</strong> The browser will sort your question into a plain-language starting path, show documents to gather, flag possible urgency, and suggest whether attorney review may be helpful.</div>
+<div class="form-grid">
+<label>Name <input autocomplete="name" name="name"/></label>
+<label>Email <input autocomplete="email" name="email" type="email"/></label>
+<label>Phone <input autocomplete="tel" name="phone"/></label>
+<label>State
+        <select name="state">
+<option>New York</option>
+<option>New Jersey</option>
+<option>Other state — future rollout</option>
+<option>District of Columbia — future rollout</option>
+</select>
+</label>
+<label>County <input name="county" placeholder="County"/></label>
+<label>What best describes this?
+        <select name="topic">
+<option>Not sure</option>
+<option>Will or will update</option>
+<option>Trust or trust update</option>
+<option>Power of attorney</option>
+<option>Health care proxy / advance directive</option>
+<option>Existing documents to review or update</option>
+<option>Probate or estate administration</option>
+<option>Executor or administrator help</option>
+<option>Trustee or trust administration help</option>
+<option>Beneficiary or family dispute</option>
+<option>Asset / beneficiary / fiduciary planning</option>
+</select>
+</label>
+</div>
+<label class="wide">Ask your question or describe the situation
+      <textarea data-counter="questionCounter" maxlength="2500" name="question" placeholder="Example: My father passed away in New York and I found an old will. I am not sure whether we need probate, what documents to gather, or whether I can serve as executor." required=""></textarea>
+<small id="questionCounter">0 / 2500</small>
+</label>
+<label class="wide upload-drop">Optional file reference — file name, type, and size only
+      <input accept="image/*,.jpg,.jpeg,.png,.webp,.heic,.heif,.tif,.tiff,.bmp,.gif,.pdf,.doc,.docx,.rtf,.odt,.txt" id="estateQuestionFile" name="attachment" type="file"/>
+<small id="estateQuestionFileLabel">Selecting a file records only its name, type, and size in this browser. The file contents are not uploaded, opened, read, analyzed, or shared.</small>
+</label>
+<fieldset>
+<legend>Possible urgency or review flags</legend>
+<label><input name="flags" type="checkbox" value="court date or deadline"/> Court date, citation, notice, or deadline</label>
+<label><input name="flags" type="checkbox" value="someone passed away"/> Someone passed away</label>
+<label><input name="flags" type="checkbox" value="family conflict"/> Family conflict or possible dispute</label>
+<label><input name="flags" type="checkbox" value="minor children"/> Minor children</label>
+<label><input name="flags" type="checkbox" value="special needs/disability"/> Special needs or disability</label>
+<label><input name="flags" type="checkbox" value="real estate"/> Real estate involved</label>
+<label><input name="flags" type="checkbox" value="business interest"/> Business interest involved</label>
+<label><input name="flags" type="checkbox" value="out-of-state property"/> Out-of-state property</label>
+<label><input name="flags" type="checkbox" value="possible creditor/tax/accounting issue"/> Creditor, estate tax, fiduciary income tax, or accounting concern</label>
+<label><input name="flags" type="checkbox" value="capacity or elder concern"/> Capacity, elder abuse, pressure, or caregiver concern</label>
+</fieldset>
+<label class="consent"><input name="consent" required="" type="checkbox"/> I understand this is not legal advice, does not create an attorney-client relationship, and does not replace review by a licensed attorney.</label>
+<button class="btn primary" type="submit">Find My Estate Starting Point</button>
+</form>
+<div aria-live="polite" class="summary-output" id="estateQuestionOutput"></div>
+</section>
+<section class="section two-col">
+<div class="content-card">
+<h2>What happens after you ask?</h2>
+<ul class="checks">
+<li>Your question is categorized into an estate planning, document update, probate, executor, trust, or family-helper path.</li>
+<li>Document, asset, beneficiary, fiduciary, and urgency checklists are created.</li>
+<li>Selected file names, types, and sizes are tracked locally; file contents are not collected.</li>
+<li>Urgent or complex issues are flagged for attorney review.</li>
+</ul>
+</div>
+<div class="content-card">
+<h2>Helpful documents to describe</h2>
+<ul class="large-list">
+<li>Existing will, old will, codicil, draft will</li>
+<li>Trust, amendment, restatement, schedule of assets</li>
+<li>Power of attorney, health care proxy, living will, advance directive, HIPAA authorization</li>
+<li>Deeds, beneficiary forms, insurance or retirement account forms</li>
+<li>Death certificate, court papers, Surrogate/county probate papers, bank or insurance letters</li>
+</ul>
+</div>
+</section>
+</main>
+<footer class="site-footer public-footer">
+<div class="footer-brand footer-wordmark"><img class="footer-logo" src="/assets/brand/estate-law-aid-logo.svg" alt="Estate Law Aid"><span>Plan. Protect. Prepare.</span></div>
+<div class="footer-links"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/disclaimer/">Disclaimer</a><a href="/trust-and-safety/">Trust &amp; Safety</a></div>
+<div class="footer-links"><a href="/how-it-works/">How It Works</a><a href="/what-you-get/">What You Get</a><a href="/state-resources/">NY/NJ Resources</a><a href="/contact/">Contact</a></div>
+<div class="footer-links"><a href="/referral-program/">Community Partner Program</a><a href="/find-a-professional/">Find a Professional</a><a href="/account/">Account</a></div>
+<div class="footer-note"><strong>Estate Law Aid</strong> is not a law firm and does not provide legal advice. Drafts, downloads, summaries, and organizing help are working materials, not final documents to sign or rely on until the required review and finalization steps are complete.</div>
+</footer>
+<script src="/assets/app.js"></script>
+<nav aria-label="Quick actions" class="mobile-action-bar">
+<a href="/start/">Start free</a>
+<a href="/account/">Continue</a>
+<a href="/find-a-professional/">Find help</a>
+</nav>
+<script src="/assets/language-control-v1153.js?v=1153"></script></body>
+</html>

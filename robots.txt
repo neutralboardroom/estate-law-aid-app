@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /owner/
+Disallow: /staff/
+Disallow: /backend/
+Disallow: /data/
+Sitemap: https://estatelawaid.com/sitemap.xml

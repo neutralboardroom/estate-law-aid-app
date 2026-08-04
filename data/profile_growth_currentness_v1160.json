@@ -1,0 +1,19 @@
+{
+  "schema": "estate-law-aid-profile-currentness",
+  "version": "1.1.60",
+  "asOf": "2026-07-31",
+  "timezone": "America/New_York",
+  "total": 809,
+  "attorneys": 591,
+  "firms": 218,
+  "relationships": 564,
+  "offices": 264,
+  "fresh": 428,
+  "watch": 381,
+  "stale": 0,
+  "unlinked": 27,
+  "rosterGaps": 71,
+  "missingPhone": 50,
+  "sourceReviewIsNotCredentialVerification": true,
+  "temporalRecalculation": "Browser and v1.1.60 API may recalculate age bands for an explicit later date without changing source facts or asserting source re-review."
+}

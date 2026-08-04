@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="noindex,nofollow" name="robots"/>
+<title>Client Sharing Center | Estate Law Aid</title>
+<meta content="Estate Law Aid matter workspaces, role dashboards, saved drafts, document version history, review orders, sharing permissions, PDF/Word/Google Docs output, and attorney review add-on workflow." name="description"/>
+
+<link href="https://estatelawaid.com/client-sharing-center/" rel="canonical"/>
+<link href="/assets/styles.css" rel="stylesheet"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png?v=1139"><link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png?v=1139"><link rel="manifest" href="/site.webmanifest?v=1139"><meta name="theme-color" content="#17324d"></head>
+<body class="ela-v1111 ela-v1117 ela-v1119 ela-v1121 ela-v1122 ela-v1123 ela-v1124 ela-v1127 ela-v1128 ela-v1129 ela-v1130 ela-v1131 ela-v1132 ela-v1133 ela-v1139">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header public-header internal-shell">
+<a aria-label="Estate Law Aid home" class="brand brand-text" href="/"><img class="brand-logo" src="/assets/brand/estate-law-aid-logo.svg" alt="Estate Law Aid"></a>
+<button aria-expanded="false" aria-label="Open menu" class="menu-toggle" type="button">Menu</button>
+<nav aria-label="Workspace navigation" class="nav"><a href="/my-dashboard/">My Dashboard</a><a href="/my-documents/">My Documents</a><a href="/work-vault/">Work Vault</a><a href="/role-account-dashboard/">Role Dashboard</a><a href="/secure-messages/">Messages</a><a href="/">Public Home</a></nav>
+</header>
+<main id="main">
+<section class="page-hero compact">
+<p class="eyebrow">Controlled sharing preview</p>
+<h1>Client Sharing Center</h1>
+<p>Preview how a customer could share a matter, draft, upload binder, or review packet with a spouse, adult child, helper, staff member, paralegal, or attorney.</p>
+</section>
+<section class="section">
+<form class="intake-form" id="sharingCenterForm">
+<div class="form-grid">
+<label>Share item name <input name="itemName" placeholder="Example: Smith family estate plan" required=""/></label>
+<label>Share with role
+        <select name="shareRole"><option>spouse/partner</option><option>adult child</option><option>trusted helper</option><option>staff</option><option>paralegal</option><option>attorney</option><option>owner/admin</option></select>
+</label>
+<label>Permission level
+        <select name="permission"><option>View only</option><option>Can comment</option><option>Can upload documents</option><option>Can prepare for review</option><option>Attorney review access after engagement</option></select>
+</label>
+<label>Expires
+        <select name="expires"><option>No preview expiration set</option><option>7 days</option><option>30 days</option><option>After review completed</option></select>
+</label>
+</div>
+<label class="wide">Sharing notes
+      <textarea data-counter="sharingNotesCounter" maxlength="1200" name="notes" placeholder="Example: Let my daughter view my health care proxy draft and upload the old POA copy."></textarea>
+<small id="sharingNotesCounter">0 / 1200</small>
+</label>
+<button class="btn primary" type="submit">Save Sharing Preview</button>
+</form>
+<div class="dash-actions"><a class="btn primary small" href="/account-setup-wizard/">Account Setup</a><a class="btn sage small" href="/my-documents/">My Documents</a><a class="btn gold small" href="/document-package-builder/">Package Builder</a><a class="btn slate small" href="/format-export-center/">Export Center</a><a class="btn light small" href="/review-checkout-preview/">Review Checkout</a>
+<button class="btn sage small" data-sharing-action="refresh">Refresh Sharing Records</button>
+<button class="btn gold small" data-sharing-action="export">Export Sharing JSON</button>
+</div>
+<div class="metrics-grid" id="sharingCenterMetrics"></div>
+<div class="dashboard-content" id="sharingCenterContent"></div>
+</section>
+</main>
+<footer class="site-footer internal-footer">
+<div class="footer-brand footer-wordmark"><img class="footer-logo" src="/assets/brand/estate-law-aid-logo.svg" alt="Estate Law Aid"><span>Plan. Protect. Prepare.</span></div>
+<div class="footer-links"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/disclaimer/">Disclaimer</a><a href="/trust-and-safety/">Trust &amp; Safety</a></div>
+<div class="footer-note">Account or role-based workspace. Private pages require secure sign-in before real use. Workflow status does not create an attorney-client relationship or make a document final.</div>
+</footer>
+<script src="/assets/app.js"></script>
+<script src="/assets/language-control-v1153.js?v=1153"></script></body>
+</html>

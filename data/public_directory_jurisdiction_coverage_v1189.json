@@ -1,0 +1,65 @@
+{
+  "schema": "ela-public-directory-jurisdiction-coverage-v1",
+  "version": "1.1.89",
+  "asOf": "2026-08-04T11:34:00-04:00",
+  "sourceDataset": "data/professional_profiles_v1189.json",
+  "filterId": "elaProfileMarket",
+  "filterLabel": "Jurisdiction",
+  "classificationFields": [
+    "state",
+    "licenseJurisdictions"
+  ],
+  "jurisdictions": {
+    "New York": 816,
+    "New Jersey": 175,
+    "Connecticut": 93,
+    "Pennsylvania": 3,
+    "Massachusetts": 5
+  },
+  "profilesWithMultipleJurisdictionMatches": 113,
+  "profilesWithNoJurisdictionMatch": 0,
+  "profileCount": 968,
+  "totalNonExclusiveMatches": 1092,
+  "options": [
+    "all",
+    "New York",
+    "New Jersey",
+    "Connecticut",
+    "Pennsylvania",
+    "Massachusetts"
+  ],
+  "surfaces": [
+    "/find-a-professional/",
+    "/professional-directory/",
+    "/nearby-estate-professional-search/"
+  ],
+  "retiredBehavior": {
+    "label": "Current market",
+    "exactProfileMarketMatch": true,
+    "recognizedOptions": [
+      "Brooklyn",
+      "Manhattan",
+      "Queens",
+      "Bronx",
+      "Northern Metro New Jersey",
+      "NYC-connected Connecticut"
+    ],
+    "completeCoverage": false
+  },
+  "currentBehavior": {
+    "label": "Jurisdiction",
+    "matchesPublishedStateOrLicenseJurisdiction": true,
+    "completeCoverage": true,
+    "overlapDisclosed": true,
+    "singleAuthoritativeRenderer": true
+  },
+  "meaningBoundary": {
+    "credentialVerification": false,
+    "goodStandingFinding": false,
+    "ranking": false,
+    "availabilityPromise": false,
+    "recommendation": false
+  },
+  "productionMutation": false,
+  "runtimeManifest": "data/public_directory_filter_runtime_v1189.json"
+}

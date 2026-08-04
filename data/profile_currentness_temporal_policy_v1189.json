@@ -1,0 +1,21 @@
+{
+  "schema": "estate-law-aid-profile-currentness-policy",
+  "version": "1.1.89",
+  "freshDays": [
+    0,
+    7
+  ],
+  "watchDays": [
+    8,
+    30
+  ],
+  "staleAfterDays": 30,
+  "currentnessDoesNotEqualCredentialVerification": true,
+  "asOf": "2026-08-04T11:34:00-04:00",
+  "sourceDateFieldPrecedence": [
+    "sourceReviewed",
+    "lastMaterialSourceReview",
+    "retrieved",
+    "lastReviewed"
+  ]
+}

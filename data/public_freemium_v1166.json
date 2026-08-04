@@ -1,0 +1,91 @@
+{
+  "schema": "estate-law-aid-public-freemium-truth",
+  "version": "1.1.66",
+  "asOf": "2026-07-31T21:20:00-04:00",
+  "corePublicFree": true,
+  "freeCapabilities": [
+    "issue and specialty routing",
+    "plain-language legal information and limitations",
+    "official-resource navigation",
+    "attorney and firm search and profile viewing",
+    "basic Document Help",
+    "questions and unknowns preparation",
+    "deterministic Matter Path",
+    "basic organizers and checklists",
+    "correction, suppression, removal, privacy, deletion, support and recovery"
+  ],
+  "nonAIFallback": {
+    "required": true,
+    "routes": [
+      "/start/",
+      "/questions-and-unknowns/",
+      "/document-help/",
+      "/official-form-source-navigator/",
+      "/find-a-professional/"
+    ],
+    "externalProviderRequired": false
+  },
+  "highCostCapabilities": [
+    "external AI",
+    "OCR",
+    "large document processing",
+    "extended storage",
+    "repeated provider-intensive tasks"
+  ],
+  "freeAllowance": {
+    "configured": false,
+    "active": false,
+    "reason": "No high-cost provider service is active in this artifact."
+  },
+  "costRecovery": {
+    "active": false,
+    "priceApproved": false,
+    "surpriseChargesProhibited": true,
+    "autoRenewalProhibited": true,
+    "failedOperationChargeProhibited": true,
+    "explicitConsentRequired": true,
+    "receiptRequired": true,
+    "spendingCapsRequired": true,
+    "freeFallbackRequired": true
+  },
+  "externalAI": false,
+  "OCR": false,
+  "uploads": false,
+  "storageService": false,
+  "billing": false,
+  "truth": "The launch-critical public path remains free and deterministic. No paid high-cost continuation is active.",
+  "bindingFloor": true,
+  "nonRegression": true,
+  "reductionRequiresScopedOwnerDecision": true,
+  "protectedRoutes": [
+    "/start/",
+    "/document-help/",
+    "/questions-and-unknowns/",
+    "/official-form-source-navigator/",
+    "/find-a-professional/",
+    "/nearby-estate-professional-search/",
+    "/privacy/",
+    "/support-and-notifications/"
+  ],
+  "protectedCapabilities": [
+    "basic non-AI starting path",
+    "official-resource discovery",
+    "profile search and viewing",
+    "basic Document Help",
+    "questions and unknowns export",
+    "correction, suppression and removal",
+    "privacy, deletion, support and recovery"
+  ],
+  "reductionGate": {
+    "currentState": "CLOSED",
+    "required": [
+      "scoped owner decision",
+      "public-user and safety impact review",
+      "notice and migration",
+      "accessible alternative",
+      "exact tests",
+      "rollback"
+    ],
+    "ordinaryCostControlsInsufficientMustBeProven": true
+  }
+}

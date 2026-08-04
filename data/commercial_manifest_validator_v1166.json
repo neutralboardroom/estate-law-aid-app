@@ -1,0 +1,33 @@
+{
+  "schema": "estate-law-aid-commercial-manifest-validator-control",
+  "version": "1.1.66",
+  "asOf": "2026-07-31T21:20:00-04:00",
+  "route": "/commercial-manifest-validator/",
+  "state": "LOCALLY_ACCEPTED_COMPATIBILITY_ONLY",
+  "authority": "PORTAL_COMPATIBILITY_VALIDATION_ONLY",
+  "canonicalAuthority": "Smarter Justice",
+  "expectedManifestSchema": "smarter-justice-commercial-terms-entitlement-manifest",
+  "requiredProducts": {
+    "covered-attorney-profile-monthly": 1500,
+    "claimed-firm-profile-monthly": 1500,
+    "firm-covered-attorney-seat-monthly": 1500
+  },
+  "currency": "USD",
+  "billingCadence": "month",
+  "checksFreeFactualRights": true,
+  "checksClaimMemberSeparation": true,
+  "checksOnePayerSeatTransfer": true,
+  "checksTaxesRefundsCancellationDelinquencySupport": true,
+  "checksNoBusinessGuarantees": true,
+  "inputStorage": false,
+  "automaticSending": false,
+  "secretsAllowed": false,
+  "customerOrMatterDataAllowed": false,
+  "createsCanonicalReceipt": false,
+  "activatesCheckout": false,
+  "activatesBilling": false,
+  "mutatesEntitlements": false,
+  "opensD4D5DeploymentOrLiveGate": false,
+  "canonicalManifestReceipt": null,
+  "truth": "A compatible report is eligible for scoped canonical-receipt review only. Smarter Justice remains the sole commercial authority."
+}

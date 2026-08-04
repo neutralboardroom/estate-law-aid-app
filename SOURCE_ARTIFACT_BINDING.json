@@ -1,0 +1,13 @@
+{
+  "schema": "estate-law-aid-production-source-binding-v1",
+  "product": "Estate Law Aid",
+  "version": "1.1.89",
+  "canonicalDomain": "https://estatelawaid.com",
+  "sourceArtifactFilename": "estate-law-aid-v1.1.89(2).zip",
+  "sourceArtifactSha256": "a422481365008549d509c6945c30b987934622f9bad5a14c56c941ea776a5d29",
+  "sourceArtifactSizeBytes": 49911280,
+  "sourceArtifactEntries": 5737,
+  "sourceArtifactRoot": "estate-law-aid-v1.1.89/",
+  "deploymentPayloadRole": "runtime projection; completed source artifact preserved by detached identity",
+  "sensitiveServices": "closed by design"
+}

@@ -1,0 +1,30 @@
+{
+  "schema": "ela-continuation-snapshot-v4",
+  "version": "1.1.89",
+  "asOf": "2026-08-04T11:34:00-04:00",
+  "authoritativeArtifact": "estate-law-aid-v1.1.89.zip",
+  "rollback": {
+    "filename": "estate-law-aid-v1.1.87.zip",
+    "version": "1.1.87",
+    "sha256": "154561315da803049500753de83eac64f06aa373dc4d02c527db1c431fd12fae",
+    "sizeBytes": 47655244,
+    "canonicalTreeDigest": "40b6e397eef8174683ee0d874ddc3035156347026930c2f05f2734ada745d864",
+    "fileInventorySha256": "7ef77f26bc49e4ff817ef409e22f8825944d1cfa82fcdce008cdca6640f1e012",
+    "releasePayloadInventorySha256": "8c3eb6765bacc07c0f110203e5940ba07d57b6d1ca69044e5d50cb7a717f87d8"
+  },
+  "counts": {
+    "profiles": 968,
+    "attorneys": 621,
+    "firms": 347,
+    "relationships": 594,
+    "offices": 398,
+    "routes": 1381,
+    "indexableRoutes": 1132,
+    "noindexRoutes": 249
+  },
+  "nextPriorities": [
+    "Targeted official New York OCA rechecks for ten held individual candidates",
+    "Refresh oldest watch-band sources",
+    "Import exact secret-free central operations evidence when available"
+  ]
+}

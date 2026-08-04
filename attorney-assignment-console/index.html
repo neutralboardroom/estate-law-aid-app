@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="noindex,nofollow" name="robots"/>
+<title>Attorney Assignment Console | Estate Law Aid</title>
+<meta content="Attorney assignment readiness with conflict, scope, engagement, payment, secure access, and acceptance gates." name="description"/>
+
+<link href="https://estatelawaid.com/attorney-assignment-console/" rel="canonical"/>
+<link href="/assets/styles.css" rel="stylesheet"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png?v=1139"><link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png?v=1139"><link rel="manifest" href="/site.webmanifest?v=1139"><meta name="theme-color" content="#17324d"></head>
+<body class="ela-v1111 ela-v1117 ela-v1119 ela-v1121 ela-v1122 ela-v1123 ela-v1124 ela-v1127 ela-v1128 ela-v1129 ela-v1130 ela-v1131 ela-v1132 ela-v1133 ela-v1139">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header public-header internal-shell">
+<a aria-label="Estate Law Aid home" class="brand brand-text" href="/"><img class="brand-logo" src="/assets/brand/estate-law-aid-logo.svg" alt="Estate Law Aid"></a>
+<button aria-expanded="false" aria-label="Open menu" class="menu-toggle" type="button">Menu</button>
+<nav aria-label="Workspace navigation" class="nav"><a href="/my-dashboard/">My Dashboard</a><a href="/my-documents/">My Documents</a><a href="/work-vault/">Work Vault</a><a href="/role-account-dashboard/">Role Dashboard</a><a href="/secure-messages/">Messages</a><a href="/">Public Home</a></nav>
+</header>
+<main id="main">
+<section class="hero compact-hero"><div class="hero-copy"><p class="eyebrow">Attorney engagement control</p><h1>Attorney Assignment Console</h1><p class="hero-text">Evaluate whether a matter is ready to show to an attorney reviewer while keeping conflict, scope, engagement terms, quote/payment, secure access, and assignment boundaries visible.</p></div></section>
+<section class="section form-section"><form class="intake-form" id="attorneyAssignmentForm"><h2>Evaluate attorney assignment</h2><div class="form-grid"><label>Matter ID<input name="matterId" placeholder="MATTER-..."/></label><label>Attorney ID<input name="attorneyId" placeholder="ATTY-..."/></label><label>State<select name="state"><option>NY</option><option>NJ</option></select></label><label>Review type<select name="reviewType"><option>One Draft Review</option><option>Full Estate Package Review</option><option>Probate / Executor Review</option><option>Trust Funding Review</option><option>Existing Document Review</option></select></label></div><div class="check-grid"><label><input name="conflictCheck" type="checkbox" value="yes"/> Conflict check cleared</label><label><input name="scope" type="checkbox" value="yes"/> Scope selected</label><label><input name="engagement" type="checkbox" value="yes"/> Engagement terms ready/signed</label><label><input name="payment" type="checkbox" value="yes"/> Payment or quote ready</label><label><input name="secureAccess" type="checkbox" value="yes"/> Secure document access ready</label><label><input name="attorneyAccepted" type="checkbox" value="yes"/> Attorney accepted assignment</label></div><button class="btn primary" type="submit">Evaluate Assignment</button><pre class="api-output" id="attorneyAssignmentOutput">Waiting.</pre></form><aside class="content-card"><h2>Attorney boundary</h2><p>No attorney review or attorney-client relationship exists from a draft, payment preview, referral, or staff workflow alone. The engagement gate must be completed by a real attorney.</p></aside></section>
+<script>document.getElementById('attorneyAssignmentForm')?.addEventListener('submit',async e=>{e.preventDefault();const fd=new FormData(e.target);const data=Object.fromEntries(fd.entries());['conflictCheck','scope','engagement','payment','secureAccess','attorneyAccepted'].forEach(k=>data[k]=fd.get(k)==='yes');const out=document.getElementById('attorneyAssignmentOutput');out.textContent='Evaluating...';try{const r=await fetch('/api/attorney/assignment-evaluate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});out.textContent=JSON.stringify(await r.json(),null,2)}catch(err){out.textContent='Backend not reachable in guided workspace. '+err.message}})</script>
+<section class="section"><div class="content-card"><p class="eyebrow">v1.1.44 complete-product capability path</p><h2>Use the current controlled preparation centers.</h2><div class="page-actions"><a class="btn primary" href="/guided-forms-center/">Guided Forms Center</a><a class="btn light" href="/document-review-preparation/">Document Review Preparation</a><a class="btn light" href="/workspace-continuity-center/">Workspace Continuity</a></div><p>Draft preparation remains clearly labeled and browser local. Confidential upload, OCR, attorney release, payment, and live opportunity allocation remain closed.</p></div></section></main>
+<footer class="site-footer internal-footer">
+<div class="footer-brand footer-wordmark"><img class="footer-logo" src="/assets/brand/estate-law-aid-logo.svg" alt="Estate Law Aid"><span>Plan. Protect. Prepare.</span></div>
+<div class="footer-links"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/disclaimer/">Disclaimer</a><a href="/trust-and-safety/">Trust &amp; Safety</a></div>
+<div class="footer-note">Account or role-based workspace. Private pages require secure sign-in before real use. Workflow status does not create an attorney-client relationship or make a document final.</div>
+</footer>
+<script src="/assets/app.js"></script>
+<script src="/assets/language-control-v1153.js?v=1153"></script></body>
+</html>

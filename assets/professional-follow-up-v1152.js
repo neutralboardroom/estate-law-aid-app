@@ -1,0 +1,25 @@
+(function(global){
+"use strict";
+const VERSION="1.1.52";
+const STORAGE_KEY="ela-professional-follow-up-v1152";
+const FOLLOW_UP_STEPS=Object.freeze([
+ {id:"find",label:"Find the existing public profile",path:"/find-a-professional/",boundary:"Search does not verify identity, credentials, availability, membership, or participation."},
+ {id:"claim",label:"Prepare a free claim or correction request",path:"/attorney-profile-claim/",boundary:"Preparation does not grant control or publish protected changes."},
+ {id:"firm",label:"Review firm and attorney relationships",path:"/attorney-profile-claim/?request=firm-roster-correction",boundary:"Firm authority and every affiliation remain separately review controlled."},
+ {id:"tour",label:"Reopen the two-minute public demonstration",path:"/attorney-tour/",boundary:"The tour uses public and synthetic data only."},
+ {id:"create",label:"Create or continue centrally through Smarter Justice",path:"https://smarterjustice.com/professional-signup.html?portal=estate-law-aid&mode=create",boundary:"Smarter Justice controls accounts, identity, claims, firms, membership, billing, entitlements, and central management."},
+ {id:"manage",label:"Manage an approved profile centrally",path:"https://smarterjustice.com/professional-dashboard.html?portal=estate-law-aid",boundary:"A central account or dashboard does not itself prove profile authority, specialty, eligibility, or live opportunity access."}
+]);
+function normalizeState(input={}){const completed={};for(const step of FOLLOW_UP_STEPS)completed[step.id]=Boolean(input.completed&&input.completed[step.id]);return {version:VERSION,completed,updatedAt:input.updatedAt||null,containsPersonalData:false,containsMatterData:false,liveSubmission:false};}
+function loadState(storage){try{return normalizeState(JSON.parse((storage||localStorage).getItem(STORAGE_KEY)||"{}"));}catch(_){return normalizeState();}}
+function saveState(state,storage){const out=normalizeState({...state,updatedAt:new Date().toISOString()});try{(storage||localStorage).setItem(STORAGE_KEY,JSON.stringify(out));return {ok:true,state:out,persistence:"browser_local"};}catch(_){return {ok:false,state:out,persistence:"memory_only"};}}
+function clearState(storage){try{(storage||localStorage).removeItem(STORAGE_KEY);return {ok:true};}catch(_){return {ok:false};}}
+function readiness(input={}){const state=normalizeState(input);const count=Object.values(state.completed).filter(Boolean).length;return {ok:true,version:VERSION,completedCount:count,totalSteps:FOLLOW_UP_STEPS.length,complete:count===FOLLOW_UP_STEPS.length,liveClaim:false,controlGranted:false,identityVerified:false,membershipActive:false,billingActive:false,opportunityDelivery:false,centralAuthority:"Smarter Justice",basicClaimCorrectionFree:true};}
+function professionalBoundaries(){return {version:VERSION,pricingAuthority:"Smarter Justice",basicClaimCorrectionFree:true,paymentBuysVerification:false,paymentBuysOrganicRank:false,paymentPromisesCommercialResult:false,automaticOutreach:false,justiceBoothStatusDisplayed:false,privateClientOrMatterDataRequired:false};}
+function copyText(text){if(typeof navigator!=="undefined"&&navigator.clipboard&&navigator.clipboard.writeText)return navigator.clipboard.writeText(text).then(()=>true).catch(()=>false);return Promise.resolve(false);}
+function renderStatus(state){const r=readiness(state),el=document.getElementById("professionalFollowUpStatus");if(el)el.textContent=`${r.completedCount} of ${r.totalSteps} optional follow-up steps marked complete on this device. Nothing was submitted.`;}
+function init(){if(typeof document==="undefined")return;const state=loadState();document.querySelectorAll('[data-follow-up-step]').forEach(box=>{const id=box.getAttribute('data-follow-up-step');box.checked=Boolean(state.completed[id]);box.addEventListener('change',()=>{state.completed[id]=box.checked;const result=saveState(state);renderStatus(result.state);});});renderStatus(state);document.querySelectorAll('[data-follow-up-action="clear"]').forEach(b=>b.addEventListener('click',()=>{clearState();document.querySelectorAll('[data-follow-up-step]').forEach(x=>x.checked=false);renderStatus(normalizeState());}));document.querySelectorAll('[data-follow-up-action="copy"]').forEach(b=>b.addEventListener('click',async()=>{const ok=await copyText('https://estatelawaid.com/professional-follow-up/');const e=document.getElementById('professionalFollowUpCopyStatus');if(e)e.textContent=ok?'Professional follow-up link copied.':'Copy was unavailable. Use EstateLawAid.com/professional-follow-up/';}));}
+if(typeof module!=="undefined"&&module.exports)module.exports={VERSION,STORAGE_KEY,FOLLOW_UP_STEPS,normalizeState,loadState,saveState,clearState,readiness,professionalBoundaries};
+if(typeof document!=="undefined"){if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();}
+global.EstateLawAidProfessionalFollowUpV1152={VERSION,FOLLOW_UP_STEPS,normalizeState,readiness,professionalBoundaries};
+})(typeof window!=="undefined"?window:globalThis);

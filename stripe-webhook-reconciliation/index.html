@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="noindex,nofollow" name="robots"/>
+<title>Stripe Webhook Reconciliation | Estate Law Aid</title>
+<meta content="Payment confirmation, webhook audit, refund, chargeback, referral reward hold, and platform-fee separation controls." name="description"/>
+
+<link href="https://estatelawaid.com/stripe-webhook-reconciliation/" rel="canonical"/>
+<link href="/assets/styles.css" rel="stylesheet"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png?v=1139"><link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png?v=1139"><link rel="manifest" href="/site.webmanifest?v=1139"><meta name="theme-color" content="#17324d"></head>
+<body class="ela-v1111 ela-v1117 ela-v1119 ela-v1121 ela-v1122 ela-v1123 ela-v1124 ela-v1127 ela-v1128 ela-v1129 ela-v1130 ela-v1131 ela-v1132 ela-v1133 ela-v1139">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header public-header internal-shell">
+<a aria-label="Estate Law Aid home" class="brand brand-text" href="/"><img class="brand-logo" src="/assets/brand/estate-law-aid-logo.svg" alt="Estate Law Aid"></a>
+<button aria-expanded="false" aria-label="Open menu" class="menu-toggle" type="button">Menu</button>
+<nav aria-label="Workspace navigation" class="nav"><a href="/my-dashboard/">My Dashboard</a><a href="/my-documents/">My Documents</a><a href="/work-vault/">Work Vault</a><a href="/role-account-dashboard/">Role Dashboard</a><a href="/secure-messages/">Messages</a><a href="/">Public Home</a></nav>
+</header>
+<main id="main">
+<section class="hero compact-hero"><div class="hero-copy"><p class="eyebrow">Payments • reconciliation</p><h1>Stripe Webhook Reconciliation</h1><p class="hero-text">Real launch needs payments tied to matters only after webhook confirmation, with refund/chargeback holds, referral reward holds, and clear separation between platform fees, attorney legal fees, court costs, vendor costs, and outside professional fees.</p><div class="cta-grid"><a class="btn primary" href="/payment-payout-center/">Payment Center</a><a class="btn gold" href="/refund-chargeback-center/">Refunds</a><a class="btn sage" href="/referral-payout-admin/">Referral Payout Admin</a></div></div></section>
+<section class="section"><div class="v27-command-grid"><form class="content-card" id="v27PaymentReconcileForm"><h2>Reconcile payment record</h2><label>Checkout Session ID<input name="checkoutSessionId" value="cs_test_preview"/></label><label>Matter ID<input name="matterId" value="MATTER-DEMO"/></label><label>Amount cents<input name="amountCents" type="number" value="14900"/></label><label>Status<select name="status"><option>paid</option><option>pending</option><option>failed</option><option>refunded</option><option>chargeback</option></select></label><label>Referral code<input name="referralCode" value="EHD-SAMPLE"/></label><button class="btn primary" type="submit">Reconcile Payment</button><pre class="api-output" id="v27PaymentReconcileOutput"></pre></form><form class="content-card" id="v27WebhookPreviewForm"><h2>Webhook event preview</h2><label>Event type<select name="type"><option>checkout.session.completed</option><option>payment_intent.succeeded</option><option>charge.refunded</option><option>charge.dispute.created</option></select></label><label>Event ID<input name="eventId" value="evt_preview"/></label><label>Object ID<input name="objectId" value="cs_test_preview"/></label><button class="btn gold" type="submit">Record Webhook Preview</button><pre class="api-output" id="v27WebhookOutput"></pre></form></div></section>
+</main>
+<footer class="site-footer internal-footer">
+<div class="footer-brand footer-wordmark"><img class="footer-logo" src="/assets/brand/estate-law-aid-logo.svg" alt="Estate Law Aid"><span>Plan. Protect. Prepare.</span></div>
+<div class="footer-links"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/disclaimer/">Disclaimer</a><a href="/trust-and-safety/">Trust &amp; Safety</a></div>
+<div class="footer-note">Account or role-based workspace. Private pages require secure sign-in before real use. Workflow status does not create an attorney-client relationship or make a document final.</div>
+</footer>
+<script src="/assets/app.js"></script>
+<script src="/assets/language-control-v1153.js?v=1153"></script></body>
+</html>

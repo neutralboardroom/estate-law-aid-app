@@ -1,0 +1,15 @@
+{
+  "schema": "ela-evidence-index-v4",
+  "version": "1.1.89",
+  "asOf": "2026-08-04T11:34:00-04:00",
+  "files": [
+    "ARTIFACT_BINDING_AND_MODE_RECEIPT.json",
+    "CURRENT-TRUTH-v1.1.89.json",
+    "RELEASE-MANIFEST-v1.1.89.json",
+    "data/public_directory_inventory_v1189.json",
+    "data/public_directory_jurisdiction_coverage_v1189.json",
+    "data/release_test_results_v1189.json",
+    "OWNER_RECEIPT.txt",
+    "RELEASE_PAYLOAD_INVENTORY_SHA256.txt"
+  ]
+}

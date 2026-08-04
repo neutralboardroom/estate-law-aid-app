@@ -1,0 +1,128 @@
+{
+  "schema": "estate-law-aid-owner-decision-registry",
+  "version": "1.1.66",
+  "asOf": "2026-07-31T21:20:00-04:00",
+  "receipts": [
+    {
+      "decisionId": "DEC-ELA-MEMBERSHIP-TEST-7D467B6F6C",
+      "relatedOwnerActionRequestId": null,
+      "decisionMaker": "Roger Gillman",
+      "decisionTimestamp": "2026-07-31T16:17:00-04:00",
+      "sourcePrompt": {
+        "filename": "Four_Initial_Legal_Micro_Portals_Reusable_Master_Build_Prompt_Twentieth_Pass_Monday_Launch_Top_Tier_Demonstration_Public_Freemium_15_Dollar_Attorney_Firm_Membership_AI_Cost_Recovery_2026-07-31(1).txt",
+        "sha256": "a666f7f5b32e2da6cc1561bfd900c75d11ad6a1e4645793413e83c3ab318c418",
+        "sizeBytes": 493156,
+        "lines": 10957
+      },
+      "product": "estate-law-aid",
+      "capability": "professional membership pricing presentation and central test preparation",
+      "path": "Smarter Justice central membership",
+      "launchTiers": [
+        "B",
+        "C"
+      ],
+      "environment": "local exact artifact and future bound central test environment",
+      "artifactBinding": {
+        "portalCandidate": "estate-law-aid-v1.1.66",
+        "finalExternalSha256Embedded": false
+      },
+      "decisionType": "APPROVED FOR TEST",
+      "conditions": [
+        "Use $15/month for each covered attorney profile.",
+        "Use $15/month for each claimed firm profile plus $15/month for each covered attorney profile.",
+        "Keep one active payer per covered attorney seat.",
+        "Keep basic factual claim, correction, suppression, removal and approved factual editing free.",
+        "Smarter Justice remains central commercial authority.",
+        "No live checkout until Tier B/C, Stripe, D4/D5 where applicable, deployment and owner live-operation gates pass.",
+        "No clients, leads, matters, revenue, rank, exclusivity or outcomes are promised."
+      ],
+      "limits": [
+        "Does not authorize production checkout.",
+        "Does not activate billing, subscriptions, entitlements, opportunity delivery, deployment or live acceptance."
+      ],
+      "effectiveTime": "2026-07-31T16:17:00-04:00",
+      "expirationOrRevalidation": "Revalidate on any newer owner pricing decision, central product/price identifier, public terms, tax/refund/cancellation rule, entitlement contract, or artifact display change.",
+      "revocationAuthority": "Roger Gillman",
+      "rollback": "Remove or revert the local $15 projection and keep central commercial gates closed.",
+      "safeEvidenceLocation": "data/owner_decision_registry_v1166.json",
+      "productLocalMirror": "SCOPED-OWNER-DECISION-RECEIPTS-v1.1.66.md"
+    },
+    {
+      "decisionId": "DEC-ELA-FREECORE-COMMERCIAL-15CCED94E1",
+      "relatedOwnerActionRequestId": null,
+      "decisionMaker": "Roger Gillman",
+      "decisionTimestamp": "2026-07-31T17:08:00-04:00",
+      "product": "estate-law-aid",
+      "capabilityPath": "binding public free core, USD pricing, claim/member separation, central commercial manifest and human demo acceptance gate",
+      "launchTiers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "environment": "portal preparation and test presentation only",
+      "artifactBinding": "estate-law-aid-v1.1.66 candidate; final SHA recorded externally",
+      "nonsecretConfiguration": "all billing, subscriptions, entitlements, opportunities, providers, deployment and live gates false",
+      "decisionType": "APPROVED FOR TEST",
+      "conditions": [
+        "Free public core is a nonregressive floor",
+        "USD $15 monthly attorney, firm-base and covered-seat policy may be presented accurately",
+        "Claimed basic factual control remains distinct from paid member status",
+        "Human rehearsal is required before ATTORNEY-DEMONSTRATION ACCEPTED",
+        "Smarter Justice remains the only central commercial authority"
+      ],
+      "limits": [
+        "Does not authorize live checkout, billing, subscriptions, entitlements, opportunity delivery, deployment or live acceptance.",
+        "Does not create canonical central provider product IDs.",
+        "Does not waive safety, privacy, security, accessibility, legal or broken-journey defects."
+      ],
+      "effectiveTime": "2026-07-31T17:08:00-04:00",
+      "expirationOrRevalidationTrigger": "Newer owner pricing/free-core decision, central manifest change, candidate change or material public copy change",
+      "revocationAuthority": "Roger Gillman",
+      "rollback": "Restore exact v1.1.61 artifact and prior portal projection; keep all live gates closed.",
+      "safeEvidenceLocation": "data/owner_decision_registry_v1166.json",
+      "productLocalMirror": "data/owner_decision_registry_v1166.json",
+      "sourcePrompt": {
+        "filename": "Four_Initial_Legal_Micro_Portals_Reusable_Master_Build_Prompt_Twenty_First_Pass_All_Four_Portal_Monday_Readiness_Human_Demo_Acceptance_USD_Commercial_Manifest_Claim_Member_Freemium_Floor_2026-07-31(2).txt",
+        "sha256": "587556cabb09c2ba0994d3d772c8546d110cf503375791ae04f9d71991edc47b",
+        "sizeBytes": 504137,
+        "lines": 11130
+      }
+    }
+  ],
+  "currentReceiptCount": 2,
+  "allowedDecisionTypes": [
+    "APPROVED FOR TEST",
+    "APPROVED FOR STAGING",
+    "APPROVED FOR PRODUCTION DEPLOYMENT",
+    "APPROVED FOR LIVE ACTIVATION",
+    "ACCEPTED FOR CONTINUED LIVE OPERATION",
+    "DECLINED",
+    "DEFERRED"
+  ],
+  "requiredFields": [
+    "decisionId",
+    "decisionMaker",
+    "decisionTimestamp",
+    "product",
+    "capability",
+    "path",
+    "launchTiers",
+    "environment",
+    "artifactBinding",
+    "decisionType",
+    "conditions",
+    "limits",
+    "effectiveTime",
+    "expirationOrRevalidation",
+    "revocationAuthority",
+    "rollback",
+    "safeEvidenceLocation",
+    "productLocalMirror"
+  ],
+  "pendingDecisionNeeds": [
+    "production deployment approval",
+    "post-deployment continued-live-operation acceptance",
+    "complete public terms, tax, cancellation, refund, proration, delinquency and support approval before Tier C live activation"
+  ],
+  "truth": "One scoped pricing/test-preparation decision receipt exists. No deployment or live-operation receipt exists."
+}

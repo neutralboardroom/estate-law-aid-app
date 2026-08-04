@@ -1,0 +1,26 @@
+{
+  "schema": "estate-law-aid-controlled-publication-receipt",
+  "version": "1.1.60",
+  "compilerVersion": "ela-profile-publication-compiler-2.0.0",
+  "batchId": "ELA-V1159-APPROVAL-LIVE-SEPARATION-20260730",
+  "manifestDigest": "a3dfcba5a1bd4392c2de9e69da1c7726e04b08db60efa3701d77ad43dea96431",
+  "baselineDigest": "2e05e69b1897625937c3eb6a225f2c271aae711da3218185dd4fbb6feb56d88d",
+  "counts": {
+    "before": 809,
+    "final": 809,
+    "new": 0,
+    "updated": 0
+  },
+  "errors": [],
+  "publicationDecision": "NO_PROFILE_FACT_OR_PUBLICATION_CHANGE",
+  "humanApprovalRecorded": true,
+  "automaticPublication": false,
+  "automaticPublicationGate": "closed",
+  "explicitCommit": false,
+  "deterministic": true,
+  "claimed": 0,
+  "controlGranted": 0,
+  "outreachDeliveryEnabled": 0,
+  "asOf": "2026-07-31T15:14:00-04:00",
+  "reason": "No profile fact or publication change in v1.1.60; release scope is temporal currentness, owner current truth, and release-process cleanup."
+}

@@ -1,0 +1,11 @@
+{
+  "schema": "ela-launch-capability-matrix-v4",
+  "version": "1.1.89",
+  "asOf": "2026-08-04T11:34:00-04:00",
+  "publicDirectory": "OPEN_VERIFIED_LOCAL",
+  "jurisdictionFilter": "OPEN_VERIFIED_LOCAL",
+  "centralBilling": "CONTRACT_READY_NOT_CONNECTED",
+  "centralAi": "CONTRACT_READY_NOT_CONNECTED",
+  "deployment": "CURRENT_EXTERNAL_FACT_UNVERIFIED",
+  "productionPromotion": "BLOCKED"
+}

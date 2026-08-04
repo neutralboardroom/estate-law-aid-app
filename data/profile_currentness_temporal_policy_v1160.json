@@ -1,0 +1,31 @@
+{
+  "schema": "estate-law-aid-profile-currentness-temporal-policy",
+  "version": "1.1.60",
+  "timezone": "America/New_York",
+  "packagedSnapshotAsOf": "2026-07-31",
+  "bandDefinitions": {
+    "fresh_0_7": "0 through 7 calendar days after source review",
+    "watch_8_90": "8 through 90 calendar days after source review",
+    "stale_or_unknown": "more than 90 days or invalid/unknown review date"
+  },
+  "browserRecalculationEnabled": true,
+  "apiExplicitDateRecalculationEnabled": true,
+  "defaultApiDateBasis": "packaged_snapshot",
+  "sourceFactsMutatedByRecalculation": false,
+  "sourceReviewClaimedByRecalculation": false,
+  "credentialVerificationClaimed": false,
+  "nextBandTransitionDate": "2026-08-02",
+  "profilesChangingBandAtNextTransition": 101,
+  "nextTransitionCounts": {
+    "fresh": 327,
+    "watch": 482,
+    "stale": 0
+  },
+  "revalidationTriggers": [
+    "material source review date change",
+    "profile source correction or suppression",
+    "band-definition change",
+    "date parsing or timezone change"
+  ],
+  "truth": "Recalculation changes only the age classification used for review prioritization. It does not verify that the source remains accurate, verify a professional, publish a correction, or authorize outreach."
+}

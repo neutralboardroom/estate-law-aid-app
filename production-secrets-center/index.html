@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="noindex,nofollow" name="robots"/>
+<title>Production Secrets Center | Estate Law Aid</title>
+<meta content="Configuration checklist for environment variables and production secrets without exposing private values." name="description"/>
+
+<link href="https://estatelawaid.com/production-secrets-center/" rel="canonical"/>
+<link href="/assets/styles.css" rel="stylesheet"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png?v=1139"><link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png?v=1139"><link rel="manifest" href="/site.webmanifest?v=1139"><meta name="theme-color" content="#17324d"></head>
+<body class="ela-v1111 ela-v1117 ela-v1119 ela-v1121 ela-v1122 ela-v1123 ela-v1124 ela-v1127 ela-v1128 ela-v1129 ela-v1130 ela-v1131 ela-v1132 ela-v1133 ela-v1139">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header public-header internal-shell">
+<a aria-label="Estate Law Aid home" class="brand brand-text" href="/"><img class="brand-logo" src="/assets/brand/estate-law-aid-logo.svg" alt="Estate Law Aid"></a>
+<button aria-expanded="false" aria-label="Open menu" class="menu-toggle" type="button">Menu</button>
+<nav aria-label="Workspace navigation" class="nav"><a href="/my-dashboard/">My Dashboard</a><a href="/my-documents/">My Documents</a><a href="/work-vault/">Work Vault</a><a href="/role-account-dashboard/">Role Dashboard</a><a href="/secure-messages/">Messages</a><a href="/">Public Home</a></nav>
+</header>
+<main id="main">
+<section class="hero compact-hero"><div class="hero-copy"><p class="eyebrow">Configuration • no secrets displayed</p><h1>Production Secrets Center</h1><p class="hero-text">Check whether the launch-critical environment variables are present without exposing values: database, auth token secret, upload encryption, Stripe, Google, AI providers, notifications, support, backup, and attorney/finalization toggles.</p><div class="cta-grid"><a class="btn primary" href="/secure-production-database/">Database Blueprint</a><a class="btn gold" href="/ai-integration-settings/">AI Settings</a><a class="btn sage" href="/payment-payout-center/">Payments &amp; Payouts</a></div></div></section>
+<section class="section"><form class="content-card" id="v27SecretsForm"><h2>Check production secret presence</h2><p>This endpoint returns presence and launch-criticality only. It never returns private key values.</p><button class="btn primary" type="submit">Run Secrets Check</button><pre class="api-output" id="v27SecretsOutput">Not checked yet.</pre></form></section>
+<section class="section"><div class="state-grid"><div class="state-card"><span>DB</span><strong>DATABASE_URL</strong><small>Required for real users and saved work.</small></div><div class="state-card"><span>AUTH</span><strong>AUTH_TOKEN_SECRET</strong><small>Required for secure account sessions.</small></div><div class="state-card"><span>FILES</span><strong>UPLOAD_ENCRYPTION_KEY</strong><small>Required for encrypted upload storage.</small></div><div class="state-card"><span>PAY</span><strong>STRIPE_SECRET_KEY + WEBHOOK</strong><small>Required for live/test checkout confirmation.</small></div><div class="state-card"><span>AI</span><strong>AI vendor keys</strong><small>Optional, but needed for live multi-voice AI.</small></div><div class="state-card"><span>DOCS</span><strong>Google OAuth</strong><small>Required for live Google Docs export.</small></div></div></section>
+</main>
+<footer class="site-footer internal-footer">
+<div class="footer-brand footer-wordmark"><img class="footer-logo" src="/assets/brand/estate-law-aid-logo.svg" alt="Estate Law Aid"><span>Plan. Protect. Prepare.</span></div>
+<div class="footer-links"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/disclaimer/">Disclaimer</a><a href="/trust-and-safety/">Trust &amp; Safety</a></div>
+<div class="footer-note">Account or role-based workspace. Private pages require secure sign-in before real use. Workflow status does not create an attorney-client relationship or make a document final.</div>
+</footer>
+<script src="/assets/app.js"></script>
+<script src="/assets/language-control-v1153.js?v=1153"></script></body>
+</html>

@@ -1,0 +1,69 @@
+{
+  "schema": "estate-law-aid-profile-participation-state-model",
+  "version": "1.1.66",
+  "asOf": "2026-07-31T17:45:00-04:00",
+  "authority": "Smarter Justice for identity, claim and paid membership; Estate Law Aid for public specialty presentation",
+  "states": [
+    {
+      "state": "PUBLIC_UNCLAIMED",
+      "paid": false,
+      "factualControl": false,
+      "publicMeaning": "Source-backed public profile; no participation or endorsement implied."
+    },
+    {
+      "state": "CLAIM_PREPARATION",
+      "paid": false,
+      "factualControl": false,
+      "publicMeaning": "Identity and authority evidence may be prepared; control is not granted."
+    },
+    {
+      "state": "CLAIMED_BASIC_FACTUAL_CONTROL",
+      "paid": false,
+      "factualControl": true,
+      "publicMeaning": "Authorized claimant may manage approved factual fields without paid membership."
+    },
+    {
+      "state": "MEMBER_ACTIVE_PAID",
+      "paid": true,
+      "factualControl": true,
+      "publicMeaning": "Exact membership is paid, current and entitled only to separately accepted benefits."
+    },
+    {
+      "state": "MEMBER_PAST_DUE_PAID_BENEFITS_PAUSED",
+      "paid": false,
+      "factualControl": true,
+      "publicMeaning": "Paid benefits pause; approved factual control and correction rights remain."
+    },
+    {
+      "state": "MEMBER_CANCELLED_FACTUAL_CONTROL_RETAINED",
+      "paid": false,
+      "factualControl": true,
+      "publicMeaning": "Paid benefits end; factual control remains subject to authority and safety rules."
+    },
+    {
+      "state": "SUPPRESSED",
+      "paid": false,
+      "factualControl": false,
+      "publicMeaning": "Public display suppressed; stale restoration prohibited."
+    },
+    {
+      "state": "REMOVED",
+      "paid": false,
+      "factualControl": false,
+      "publicMeaning": "Public record removed under the applicable receipt and restoration controls."
+    }
+  ],
+  "prohibitions": [
+    "claimed must not imply paid member",
+    "membership lapse must not remove correction/suppression/removal rights",
+    "payment must not create identity, credentials, publication, ranking or endorsement",
+    "no opportunity eligibility without separate accepted Tier D controls"
+  ],
+  "currentCounts": {
+    "publicUnclaimed": 809,
+    "claimedBasicFactualControl": 0,
+    "memberActivePaid": 0,
+    "opportunityEligible": 0
+  },
+  "liveStateProjection": false
+}
