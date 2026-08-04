@@ -22,13 +22,18 @@ jobs:
           fetch-depth: 0
           persist-credentials: true
 
-      - name: Verify, import, test, and remove transport files
+      - name: Verify, test, and import exact runtime
         shell: bash
         run: |
           set -euo pipefail
           archive="estate-law-aid-v1.1.89-render-runtime.zip"
           expected="60c296a63cd976f42b458fa6050a2817109a320571545e508ef00ce50735f45f"
-          test -f "$archive"
+
+          if [ ! -f "$archive" ]; then
+            echo "No transport archive remains; import is already complete or not yet uploaded."
+            exit 0
+          fi
+
           actual="$(sha256sum "$archive" | awk '{print $1}')"
           test "$actual" = "$expected"
 
@@ -42,45 +47,29 @@ jobs:
           test -f "$stage/index.html"
           test -f "$stage/render.yaml"
           node --check "$stage/server.js"
+          grep -q "estatelawaid.com" "$stage/server.js"
+          grep -q "a422481365008549d509c6945c30b987934622f9bad5a14c56c941ea776a5d29" "$stage/server.js"
 
-          find . -mindepth 1 -maxdepth 1 ! -name .git ! -name "$archive" -exec rm -rf {} +
+          (
+            cd "$stage"
+            PORT=10000 node server.js > "$RUNNER_TEMP/server.log" 2>&1 &
+            pid=$!
+            trap 'kill $pid 2>/dev/null || true' EXIT
+            for i in $(seq 1 20); do
+              curl -fsS http://127.0.0.1:10000/health > "$RUNNER_TEMP/health.json" && break
+              sleep 1
+            done
+            node -e "const h=require(process.env.RUNNER_TEMP+'/health.json'); if(!h.ok||h.version!=='1.1.89'||h.app!=='Estate Law Aid'||h.sensitiveTrafficApproved!==false) process.exit(1)"
+            curl -fsS http://127.0.0.1:10000/ | grep -qi "Estate Law Aid"
+          )
+
+          find . -mindepth 1 -maxdepth 1 \
+            ! -name .git \
+            ! -name .github \
+            ! -name "$archive" \
+            -exec rm -rf {} +
           cp -a "$stage"/. .
           rm -f "$archive"
-
-          mkdir -p .github/workflows
-          cat > .github/workflows/qualification.yml <<'YAML'
-          name: Estate Law Aid qualification
-          on:
-            push:
-              branches: [main]
-            pull_request:
-              branches: [main]
-          permissions:
-            contents: read
-          jobs:
-            qualify:
-              runs-on: ubuntu-latest
-              steps:
-                - uses: actions/checkout@v4
-                - uses: actions/setup-node@v4
-                  with:
-                    node-version: '22.x'
-                - name: Validate exact public runtime
-                  run: |
-                    set -euo pipefail
-                    test "$(node -p "require('./package.json').version")" = "1.1.89"
-                    node --check server.js
-                    test -f index.html
-                    test -f render.yaml
-                    grep -q "estatelawaid.com" server.js
-                    grep -q "a422481365008549d509c6945c30b987934622f9bad5a14c56c941ea776a5d29" server.js
-                    node server.js > "$RUNNER_TEMP/server.log" 2>&1 &
-                    pid=$!
-                    trap 'kill $pid 2>/dev/null || true' EXIT
-                    for i in $(seq 1 20); do curl -fsS http://127.0.0.1:10000/health > "$RUNNER_TEMP/health.json" && break; sleep 1; done
-                    node -e "const h=require(process.env.RUNNER_TEMP+'/health.json'); if(!h.ok||h.version!=='1.1.89'||h.app!=='Estate Law Aid'||h.sensitiveTrafficApproved!==false) process.exit(1)"
-                    curl -fsS http://127.0.0.1:10000/ | grep -qi "Estate Law Aid"
-          YAML
 
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
