@@ -1,0 +1,97 @@
+{
+  "schema": "smarter-justice-portal-deploy-config",
+  "version": "1.1.99",
+  "productId": "estate-law-aid",
+  "publicName": "Estate Law Aid",
+  "packageRoot": "estate-law-aid-v1.1.99/",
+  "releaseZip": "estate-law-aid-v1.1.99.zip",
+  "releaseZipSha256State": "DETACHED AFTER FINAL PACKAGING",
+  "canonicalDomain": "https://estatelawaid.com",
+  "approvedFallbackDomainState": "NOT RECORDED",
+  "repository": {
+    "owner": "UNKNOWN — CONNECTED DISCOVERY REQUIRED",
+    "name": "UNKNOWN — CONNECTED DISCOVERY REQUIRED",
+    "defaultBranch": "UNKNOWN",
+    "productionBranch": "UNKNOWN",
+    "commit": "UNKNOWN UNTIL GIT QUALIFICATION",
+    "tree": "UNKNOWN UNTIL GIT QUALIFICATION"
+  },
+  "provider": {
+    "name": "Render",
+    "workspace": "UNKNOWN — CONNECTED DISCOVERY REQUIRED",
+    "serviceId": "UNKNOWN — CONNECTED DISCOVERY REQUIRED",
+    "serviceType": "web_service_expected_not_verified",
+    "region": "UNKNOWN",
+    "linkedBranch": "UNKNOWN",
+    "autoDeploy": "UNKNOWN",
+    "overlappingDeployPolicy": "UNKNOWN"
+  },
+  "runtime": {
+    "rootDirectory": "backend",
+    "runtime": "Node >=20",
+    "buildCommand": "npm ci --ignore-scripts --omit=dev",
+    "startCommand": "node server.js",
+    "preDeployCommand": "none; release classified NO_MIGRATION at source layer"
+  },
+  "health": {
+    "healthPath": "/api/v1199/health",
+    "readinessPath": "/api/v1199/readiness",
+    "canonicalPublicHealthPath": "/health/",
+    "timeoutSeconds": 5,
+    "productionVerified": false
+  },
+  "statefulServices": {
+    "database": "PostgreSQL capability present; exact production binding unknown",
+    "persistentDisk": "UNKNOWN",
+    "migrationClass": "NO_MIGRATION SOURCE CLASSIFICATION — CONNECTED PRODUCTION REVALIDATION REQUIRED"
+  },
+  "githubEnvironment": {
+    "name": "production",
+    "exists": "UNKNOWN",
+    "secretPresenceOnly": {
+      "RENDER_DEPLOY_HOOK": "UNTESTED",
+      "RENDER_API_KEY": "UNTESTED",
+      "DATABASE_URL": "UNTESTED"
+    }
+  },
+  "deployMode": {
+    "selected": "UNSELECTED — RUN CONNECTED DEPLOYMENT DOCTOR",
+    "eligibleOrder": [
+      "native_checks_pass",
+      "render_mcp",
+      "github_dispatch_render_api_or_cli",
+      "service_specific_deploy_hook",
+      "prebuilt_image_digest",
+      "one_protected_owner_action"
+    ]
+  },
+  "authorization": {
+    "deploymentPreparationAuthorized": true,
+    "productScopedDeployCommandReceived": false,
+    "portfolioBatchAuthorizationReceived": false,
+    "productionPromotionAuthorized": false
+  },
+  "truth": {
+    "locallyQualified": true,
+    "launchDayState": "QUALIFIED_NOT_AUTHORIZED",
+    "productionDeployed": false,
+    "postDeployVerified": false,
+    "continuedLiveAccepted": false,
+    "canonicalActivePairRegisterCommitProven": false,
+    "productReadinessState": "DEPLOYMENT_QUALIFIED",
+    "productionAuthorized": false
+  },
+  "noSecretValues": true,
+  "oneStepPacketId": "SJP-LMP-UNIVERSAL-ONE-STEP-2026-08-05-V25-COMPACT-SELF-ROUTING",
+  "productReadinessState": "DEPLOYMENT_QUALIFIED",
+  "artifactVersion": "1.1.99",
+  "v14Mode": "EXISTING_CHAT_PACKET_ONLY",
+  "externalFactState": "CURRENT_EXTERNAL_FACT_UNVERIFIED",
+  "productionDecision": "NO_GO",
+  "productionAuthorized": false,
+  "deploymentPerformed": false,
+  "v24Role": "PRODUCT_WORKER",
+  "v24Workflow": "PRODUCT_NEXT_VERSION",
+  "v25Role": "PRODUCT_WORKER",
+  "v25Workflow": "BUILD_QUALIFY_RELEASE_STAGE_DEPLOY_VERIFY"
+}

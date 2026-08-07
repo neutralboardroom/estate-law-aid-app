@@ -1047,3 +1047,79 @@ input,select,textarea{border-radius:8px;border-color:#b9c5d0;min-height:44px}tex
 
 /* v1.1.79 profile revalidation workbench */
 .ela-revalidation-boundary{border-left:4px solid currentColor;padding:1rem;background:#f7f9fb;margin-bottom:1rem}.ela-revalidation-summary{font-size:1.05rem;margin:1rem 0}.ela-revalidation-filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;align-items:end}.ela-revalidation-filters label{display:grid;gap:.35rem}.ela-revalidation-rows{display:grid;gap:1rem;margin-top:1rem}.ela-revalidation-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(170px,220px);gap:1rem;border:1px solid #d7dee5;border-radius:.5rem;padding:1rem}.ela-revalidation-row h2{margin:.2rem 0 .5rem;font-size:1.12rem}.ela-revalidation-row label{display:grid;gap:.35rem;align-content:start}@media(max-width:680px){.ela-revalidation-row{grid-template-columns:1fr}}@media print{.site-header,.site-footer,.ela-revalidation-filters,.page-actions,.mobile-action-bar{display:none!important}.ela-revalidation-row{break-inside:avoid}}
+
+/* v1.1.90 — accessible deterministic progressive profile rendering */
+.ela-v1190-directory-controls{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.8rem;margin:1rem 0 2rem}.ela-v1190-load-more{min-width:220px}.ela-v1190-directory-note{flex:1 1 360px;margin:0;color:var(--muted,#637083);line-height:1.5}.ela-v1190-load-more[hidden]{display:none!important}@media(max-width:760px){.ela-v1190-directory-controls{display:grid;grid-template-columns:1fr}.ela-v1190-load-more{width:100%}.ela-v1190-directory-note{text-align:left}}
+
+/* v1.1.93 — optional browser-local directory view; presentation density only. */
+.ela-profile-grid.ela-v1193-view-compact{grid-template-columns:repeat(3,minmax(0,1fr));gap:.65rem}
+.ela-profile-grid.ela-v1193-view-compact .ela-profile-card{padding:.75rem;gap:.45rem}
+.ela-profile-grid.ela-v1193-view-compact .ela-profile-card h3{font-size:1.05rem;line-height:1.25}
+.ela-profile-grid.ela-v1193-view-compact .profile-tags{gap:.28rem}
+.ela-profile-grid.ela-v1193-view-compact .profile-tags span{padding:.22rem .42rem;font-size:.74rem}
+@media(max-width:1100px){.ela-profile-grid.ela-v1193-view-compact{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.ela-profile-grid.ela-v1193-view-compact{grid-template-columns:1fr}.ela-profile-grid.ela-v1193-view-compact .ela-profile-card{padding:.85rem}}
+
+/* v1.1.94 truthful action feedback */
+.ela-action-feedback-v1194{margin:1rem 0 0;padding:1rem;border:1px solid #b8c7d6;border-radius:.65rem;background:#f7fbff;color:#17324d;box-shadow:0 1px 2px rgba(23,50,77,.06)}
+.ela-action-feedback-v1194[hidden]{display:none!important}
+.ela-action-feedback-v1194 strong{display:block;margin-bottom:.35rem}
+.ela-action-feedback-v1194 p{margin:.25rem 0 .75rem}
+.ela-action-preview-v1194{max-height:18rem;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;margin:.5rem 0 0;padding:.75rem;border-radius:.45rem;background:#fff;border:1px solid #d7e0e8;font:inherit;line-height:1.45}
+
+/* Estate Law Aid v1.1.95 — V20 simple homepage and truthful language state */
+.ela-v1195-header{gap:1rem;flex-wrap:wrap}
+.ela-v1195-language{margin-left:auto;display:flex;gap:.65rem;align-items:center;font-size:.95rem;white-space:nowrap}
+.ela-v1195-language span{font-weight:700;color:var(--navy,#17324d)}
+.ela-v1195-language a{color:var(--navy,#17324d);text-decoration:underline;text-underline-offset:.2em}
+.ela-v1195-hero{max-width:1180px;margin:0 auto;padding:clamp(3.25rem,8vw,7.5rem) clamp(1.25rem,4vw,3.5rem);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(220px,.8fr);gap:clamp(2rem,6vw,5rem);align-items:center;min-height:560px}
+.ela-v1195-hero-copy{max-width:720px}
+.ela-v1195-hero h1{font-size:clamp(2.4rem,6vw,5.2rem);line-height:1.02;letter-spacing:-.035em;max-width:13ch;margin:.45rem 0 1rem}
+.ela-v1195-lead{font-size:clamp(1.05rem,2vw,1.3rem);line-height:1.65;max-width:62ch;margin:0 0 1.5rem}
+.ela-v1195-hero-actions{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center}
+.ela-v1195-attorney-path{margin:1.1rem 0 .35rem;font-weight:650}
+.ela-v1195-trust{font-size:.96rem;line-height:1.5;max-width:65ch;margin:.75rem 0 0;color:#33475b}
+.ela-v1195-hero-mark{min-height:320px;position:relative;border-radius:48% 48% 20% 20%;background:linear-gradient(155deg,#f8f1df,#dfece6);overflow:hidden;box-shadow:0 22px 55px rgba(23,50,77,.12)}
+.ela-v1195-hero-mark span{position:absolute;width:120px;height:120px;border-radius:50%;background:#d9b65d;right:18%;top:15%}
+.ela-v1195-hero-mark i{position:absolute;width:65%;height:55%;border-radius:50% 50% 0 0;background:#668a79;left:9%;bottom:-10%;transform:rotate(-8deg)}
+.ela-v1195-hero-mark b{position:absolute;width:50%;height:42%;border-radius:50% 50% 0 0;background:#17324d;right:-4%;bottom:-8%;transform:rotate(12deg)}
+.ela-v1195-section{padding-top:clamp(3rem,6vw,5rem);padding-bottom:clamp(3rem,6vw,5rem)}
+.ela-v1195-section .section-heading{max-width:760px;margin:0 auto 2rem;text-align:center}
+.ela-v1195-section .section-heading h2{max-width:22ch;margin:.35rem auto 0}
+.ela-v1195-path-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.1rem;max-width:1180px;margin:0 auto}
+.ela-v1195-path-grid .content-card{height:100%;display:flex;flex-direction:column;align-items:flex-start}
+.ela-v1195-path-grid .content-card>a{margin-top:auto;font-weight:700}
+.ela-v1195-how{max-width:900px;margin:0 auto}
+.ela-v1195-how ol{display:grid;gap:.85rem;padding-left:1.4rem;margin:1.4rem 0 1.8rem}
+.ela-v1195-attorney{max-width:980px;margin:0 auto;display:flex;gap:2rem;align-items:center;justify-content:space-between}
+.ela-v1195-language-page main{min-height:65vh}
+.ela-v1195-language-page .page-hero>div,.ela-v1195-language-page .section>div{max-width:980px;margin-inline:auto}
+@media (max-width:900px){.ela-v1195-language{order:3;width:100%;justify-content:flex-end}.ela-v1195-hero{grid-template-columns:1fr;min-height:auto}.ela-v1195-hero-mark{min-height:220px;max-width:520px;width:100%;margin:0 auto}.ela-v1195-path-grid{grid-template-columns:1fr}.ela-v1195-attorney{display:block}.ela-v1195-attorney .btn{margin-top:1rem}}
+@media (max-width:600px){.ela-v1195-hero{padding-top:2.5rem}.ela-v1195-hero h1{font-size:clamp(2.25rem,13vw,3.6rem)}.ela-v1195-hero-actions{display:grid}.ela-v1195-hero-actions .btn{width:100%;text-align:center}.ela-v1195-language{justify-content:flex-start}.ela-v1195-hero-mark{display:none}}
+
+/* Estate Law Aid v1.1.96 — privacy-first Spanish core preparation workspace */
+.ela-v1196-es-header{gap:1rem;flex-wrap:wrap}.ela-v1196-es-hero{background:linear-gradient(180deg,#fff,#f7f8fa)}
+.ela-v1196-es-workspace{max-width:1000px;margin:0 auto}.ela-v1196-es-form{display:grid;gap:1.1rem}
+.ela-v1196-field-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.ela-v1196-es-form label{display:grid;gap:.4rem;font-weight:650}
+.ela-v1196-es-form input,.ela-v1196-es-form select,.ela-v1196-es-form textarea{width:100%;font:inherit;color:var(--navy,#17324d);background:#fff;border:1px solid var(--line,#d7dde4);border-radius:10px;padding:.78rem}.ela-v1196-es-form textarea{resize:vertical;line-height:1.5}
+.ela-v1196-es-form fieldset{border:1px solid var(--line,#d7dde4);border-radius:12px;padding:1rem}.ela-v1196-es-form legend{font-weight:750;padding:0 .35rem}
+.ela-v1196-check-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem}.ela-v1196-check-grid label{display:flex;gap:.55rem;align-items:flex-start;font-weight:500}.ela-v1196-check-grid input{width:auto;margin-top:.2rem}
+.ela-v1196-es-actions{display:flex;gap:.75rem;flex-wrap:wrap}.ela-v1196-es-status{margin:0;padding:.85rem 1rem;background:#f4f7f9;border-left:4px solid var(--gold,#c8a25a)}.ela-v1196-es-status[data-state="error"]{border-left-color:#9a3f3f}
+@media(max-width:700px){.ela-v1196-field-grid,.ela-v1196-check-grid{grid-template-columns:1fr}.ela-v1196-es-actions .btn{width:100%;text-align:center}}
+@media print{.site-header,.site-footer,.ela-v1196-es-actions,.page-actions{display:none!important}.ela-v1196-es-form{box-shadow:none;border:0;padding:0}.section{padding:1rem 0}}
+
+
+/* Estate Law Aid v1.1.97 — Spanish professional-search preparation */
+.ela-v1197-pro-form{gap:1.3rem}.ela-v1197-candidate{display:grid;gap:1rem;background:#fff}.ela-v1197-pro-summary{margin:0;padding:.85rem 1rem;border:1px solid var(--line,#d7dde4);border-radius:10px;background:#fff;font-weight:700}.ela-v1197-boundary{max-width:960px;margin:0 auto;border-left:6px solid var(--sage,#7a967c)}
+@media(max-width:700px){.ela-v1197-pro-form .ela-v1196-es-actions .btn{width:100%}}
+@media print{.ela-v1197-es-professional .site-header,.ela-v1197-es-professional .site-footer,.ela-v1197-es-professional .ela-v1196-es-actions,.ela-v1197-es-professional .page-actions{display:none!important}.ela-v1197-candidate{break-inside:avoid}.ela-v1197-pro-form{box-shadow:none;border:0;padding:0}}
+
+/* v1.1.98 — Spanish directory and official-resource navigation */
+.ela-v1198-directory-controls,.ela-v1198-resource-controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1rem;align-items:end}.ela-v1198-directory-controls label,.ela-v1198-resource-controls label{display:grid;gap:.4rem;font-weight:700}.ela-v1198-directory-controls input,.ela-v1198-directory-controls select,.ela-v1198-resource-controls input,.ela-v1198-resource-controls select{width:100%}.ela-v1198-directory-status{max-width:78rem;margin:1rem auto;font-weight:700}.ela-v1198-more{text-align:center;margin-top:1.25rem}.ela-v1198-more [hidden]{display:none}.ela-v1198-resource-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}.ela-v1198-view-compact .ela-profile-card{padding:1rem;gap:.35rem}.ela-v1198-view-compact .ela-profile-card p{margin:.25rem 0}@media(max-width:600px){.ela-v1198-directory-controls,.ela-v1198-resource-controls{grid-template-columns:1fr}.ela-v1198-resource-grid{grid-template-columns:1fr}}
+
+/* Estate Law Aid v1.1.99 Spanish trust, account, support and recovery layer */
+.ela-v1199-link-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:1rem}.ela-v1199-link-grid a{display:flex;flex-direction:column;gap:.45rem;text-decoration:none}.ela-v1199-link-grid span{color:var(--muted,#506070)}.ela-v1199-support-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.ela-v1199-support-form label{display:flex;flex-direction:column;gap:.45rem}.ela-v1199-support-form label:has(textarea),.ela-v1199-support-form label:has(input[type=checkbox]),.ela-v1199-support-actions,.ela-v1199-support-form .form-notice{grid-column:1/-1}.ela-v1199-support-form input[type=checkbox]{width:auto;margin-right:.45rem}.ela-v1199-recovery-page main{min-height:62vh}@media(max-width:760px){.ela-v1199-link-grid,.ela-v1199-support-form{grid-template-columns:1fr}.ela-v1199-support-form label:has(textarea),.ela-v1199-support-form label:has(input[type=checkbox]),.ela-v1199-support-actions,.ela-v1199-support-form .form-notice{grid-column:auto}}
+
+.ela-v1200-candidate-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}.ela-v1200-candidate-grid fieldset{min-width:0;border:1px solid var(--line,#d8d8d8);border-radius:.5rem;padding:1rem}.ela-v1200-candidate-grid label{display:block;margin:.6rem 0}.ela-v1200-candidate-grid input,.ela-v1200-candidate-grid textarea{width:100%;box-sizing:border-box}@media(max-width:800px){.ela-v1200-candidate-grid{grid-template-columns:1fr}}
+
+.ela-v1203-participant-organizer form>.content-card{margin-bottom:1rem}.ela-v1203-participant-organizer textarea{width:100%}

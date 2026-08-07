@@ -5,8 +5,8 @@ const path = require('path');
 
 const PORT = Number(process.env.PORT || 10000);
 const ROOT = path.resolve(__dirname);
-const VERSION = '1.1.89';
-const SOURCE_SHA256 = 'a422481365008549d509c6945c30b987934622f9bad5a14c56c941ea776a5d29';
+const VERSION = '1.3.4';
+const SOURCE_SHA256 = '114ff2fee0d8709175a55cab31ac407d48b12525c855fd26b45d0a3e15c25923';
 const CANONICAL_HOST = 'estatelawaid.com';
 
 const MIME = {
@@ -81,8 +81,10 @@ function serve(req, res) {
   }
   const file = safeFile(req.url);
   if (!file || !fs.existsSync(file) || !fs.statSync(file).isFile()) {
+    const custom404=path.join(ROOT,'404.html');
     headers(res, 'text/html; charset=utf-8', 'no-store');
     res.statusCode = 404;
+    if (fs.existsSync(custom404)) return fs.createReadStream(custom404).pipe(res);
     return res.end('<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Page not found | Estate Law Aid</title></head><body><main><h1>Page not found</h1><p><a href="/">Return to Estate Law Aid</a></p></main></body></html>');
   }
   const ext = path.extname(file).toLowerCase();

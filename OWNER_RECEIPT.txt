@@ -1,39 +1,14 @@
-PRODUCT_NAME: Estate Law Aid
-PRODUCT_VERSION: 1.1.89
-STARTING_ARTIFACT_SHA256: ffb5648427997159e7ad9b842eb7c33e268f78097d4735288492fa00d8a4a757
-RELEASE_PAYLOAD_INVENTORY_PATH: RELEASE_PAYLOAD_INVENTORY_SHA256.txt
-RELEASE_PAYLOAD_INVENTORY_SHA256: 0da8646f794a03c4b30e4409269ff94b61277e4195670af09db7b6941d3045d6
-RELEASE_PAYLOAD_INVENTORY_RECORD_COUNT: 5732
-SOURCE_COMMIT_SHA256: UNPROVEN
-DEPLOYMENT_IDENTITY: UNPROVEN
-FINAL_DELIVERY_ZIP_IDENTITY: REPORTED_AFTER_PACKAGING
-
-1. PRODUCT AND RELEASE ROLE
-Estate Law Aid v1.1.89; LEGAL_MICRO_PORTAL; bounded material public-directory single-runtime and state-qualified ambiguous-area filter release.
-
-2. PREDECESSOR AND SUCCESSION
-Supersedes exact estate-law-aid-v1.1.88.zip. Exact rollback is v1.1.88 SHA-256 ffb5648427997159e7ad9b842eb7c33e268f78097d4735288492fa00d8a4a757.
-
-3. RELEASE PAYLOAD IDENTITY
-The self-excluding release payload inventory excludes this receipt, itself, the legacy delivery inventory, source digest, and generated evidence manifest. Final outer ZIP identity is reported only after packaging.
-
-4. PRODUCT_PLATFORM IMPROVEMENTS
-Consolidated the public professional directory to one authoritative renderer after real browser execution proved the inherited second renderer could overwrite correct jurisdiction results with retired exact-market logic. Restored exact initial runtime inventory of 968 and exact jurisdiction counts: New York 816, New Jersey 175, Connecticut 93, Pennsylvania 3, Massachusetts 5. Separated Middlesex County, NJ and Middlesex County, CT with state-qualified area values.
-
-5. BUILDER_PROMPT_SYSTEM IMPROVEMENTS
-Added real inline-runtime browser interaction gates for initial inventory, all five jurisdictions, both state-qualified Middlesex filters, duplicate-renderer retirement, static meaning boundaries, backend parity, accessibility, deterministic packaging, and untouched extraction acceptance.
-
-6. PROFILE AND ROUTE COUNTS
-968 profiles: 621 attorneys and 347 firms; 594 relationships; 398 offices; 1,381 routes: 1,132 indexable and 249 noindex; currentness 464 fresh, 504 watch, 0 stale.
-
-7. PUBLICATION AND SAFETY TRUTH
-All profiles remain unclaimed and non-ranked. Area and jurisdiction matching use published profile fields and are not independent credential or good-standing verification. Ten individual candidates remain held for targeted official OCA rechecks.
-
-8. REPOSITORY, COMMIT, AND DEPLOYMENT
-Repository, commit, Render service, deployment ID, environment, canonical URL, and live verification are CURRENT_EXTERNAL_FACT_UNVERIFIED and not claimed.
-
-9. CENTRAL SERVICES
-Neutral Boardroom billing and Smarter Justice central AI remain contract-ready but not connected. No portal OpenAI key or other AI vendor is present. Document AI remains CLOSED_BY_DESIGN.
-
-10. DECISION AND OWNER ACTION
-CONDITIONAL_GO for exact artifact delivery and future dark deployment preparation; no production-live claim. Owner action now: none; do not enter secrets into Estate Law Aid.
+Estate Law Aid v1.2.0
+Authority: SJP-LMP-UNIVERSAL-ONE-STEP-2026-08-05-V27-RISK-BOUNDED-CURRENT-RESEARCH
+Authority SHA-256: 5c7d066678bf3aeefd5f292723335e51efc84e63a3a9182e9f6c264a29ce197f
+Owner rule chain: PASS / 92 rules / 8342318ae279cd98f37e4fb035e7643cf5f362ef50a9e041e20b8c4629a96e2e
+Base: estate-law-aid-v1.1.99.zip
+Base SHA-256: 627e3e0839a34efc3db81d4c8f8fff5007cb27e020f6bf5d80a6f1d0b76bce98
+Role: PRODUCT_WORKER
+Product ID: estate-law-aid
+Workflow: PRODUCT_NEXT_VERSION_BUILD_QUALIFY_RELEASE_STAGE_DEPLOY_VERIFY
+Routing confidence: HIGH
+Source decision: QUALIFIED_WITH_BLOCKERS
+Production decision: NO_GO
+Launch: NOT_AUTHORIZED
+Final ZIP checksum and size are reported outside the archive after deterministic packaging.
