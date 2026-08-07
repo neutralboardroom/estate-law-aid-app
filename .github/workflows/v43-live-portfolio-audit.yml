@@ -1,0 +1,50 @@
+name: V43 full live portfolio crawl
+
+on:
+  push:
+    branches:
+      - audit/v43-live-portfolio-2026-08-07
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: v43-live-portfolio-audit-2026-08-07
+  cancel-in-progress: false
+
+jobs:
+  full-live-read-only-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Check out isolated audit branch
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Compile audit crawler
+        run: python -m py_compile tools/v43_live_portfolio_audit.py
+
+      - name: Crawl every reasonably discoverable public portfolio route
+        run: |
+          python tools/v43_live_portfolio_audit.py \
+            --deadline-minutes 75 \
+            --domain-workers 5 \
+            --page-workers 4 \
+            --output v43-live-portfolio-audit.json \
+            --summary v43-live-portfolio-audit.md
+
+      - name: Upload exact read-only audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v43-live-portfolio-audit-evidence
+          path: |
+            v43-live-portfolio-audit.json
+            v43-live-portfolio-audit.md
+          if-no-files-found: error
+          retention-days: 30
