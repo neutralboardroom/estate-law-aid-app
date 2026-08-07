@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: estate-law-aid-v1189-qualification
+  group: estate-law-aid-v134-qualification
   cancel-in-progress: false
 
 jobs:
@@ -23,22 +23,30 @@ jobs:
           fetch-depth: 0
           persist-credentials: true
 
-      - name: Set up Node 22
-        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
-        with:
-          node-version: '22.x'
-          package-manager-cache: false
-
-      - name: Verify exact runtime inventory and source binding
+      - name: Detect exact runtime transport state
         shell: bash
         run: |
           set -euo pipefail
-          expected_source_sha="a422481365008549d509c6945c30b987934622f9bad5a14c56c941ea776a5d29"
-          test ! -f estate-law-aid-v1.1.89-render-runtime.zip
-          test "$(node -p "require('./package.json').version")" = "1.1.89"
-          node -e "const r=require('./SOURCE_ARTIFACT_BINDING.json');if(r.version!=='1.1.89'||r.sourceArtifactSha256!=='$expected_source_sha')process.exit(1)"
-          test "$(find . -path './.git' -prune -o -path './.github' -prune -o -type f -print | wc -l | tr -d ' ')" = "1631"
-          test "$(find . -path './.git' -prune -o -path './.github' -prune -o -type f -name '*.html' -print | wc -l | tr -d ' ')" = "1381"
+          archive="ela-runtime-v134.tar.xz"
+          expected_archive_sha="dc63c066ac3be50e8fba1caf7f4c07e3d617fda7709ef1e31a6bb55899fc3373"
+          if [ -f "$archive" ]; then
+            test "$(sha256sum "$archive" | awk '{print $1}')" = "$expected_archive_sha"
+            echo "ELA_IMPORT_PENDING=true" >> "$GITHUB_ENV"
+            echo "Exact v1.3.4 transport is present; qualification will run after the import commit."
+          else
+            echo "ELA_IMPORT_PENDING=false" >> "$GITHUB_ENV"
+          fi
+
+      - name: Verify exact runtime inventory and source binding
+        if: env.ELA_IMPORT_PENDING != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected_source_sha="114ff2fee0d8709175a55cab31ac407d48b12525c855fd26b45d0a3e15c25923"
+          test "$(node -p "require('./package.json').version")" = "1.3.4"
+          node -e "const r=require('./SOURCE_ARTIFACT_BINDING.json');if(r.version!=='1.3.4'||r.sourceArtifactFilename!=='estate-law-aid-v1.3.4.zip'||r.sourceArtifactSha256!=='$expected_source_sha'||r.sourceArtifactSizeBytes!==100083691||r.sourceArtifactEntries!==9658||r.canonicalDomain!=='https://estatelawaid.com')process.exit(1)"
+          test "$(find . -path './.git' -prune -o -path './.github' -prune -o -type f -print | wc -l | tr -d ' ')" = "2233"
+          test "$(find . -path './.git' -prune -o -path './.github' -prune -o -type f -name '*.html' -print | wc -l | tr -d ' ')" = "2005"
           test -f index.html
           test -f server.js
           test -f render.yaml
@@ -48,10 +56,12 @@ jobs:
           node --check server.js
           grep -q "estatelawaid.com" server.js
           grep -q "$expected_source_sha" server.js
-          grep -q "968 profiles" find-a-professional/index.html
+          grep -q "1,267 profiles" find-a-professional/index.html
+          test "$(grep -c '<loc>' sitemap.xml)" = "1738"
           test -z "$(find . -path './.git' -prune -o -type f -size +100M -print -quit)"
 
       - name: Validate Render contract
+        if: env.ELA_IMPORT_PENDING != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -65,6 +75,7 @@ jobs:
           grep -q '^        value: 22.23.1$' render.yaml
 
       - name: Validate local public references
+        if: env.ELA_IMPORT_PENDING != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -81,7 +92,7 @@ jobs:
             }
           })(root);
           const html=files.filter(f=>f.endsWith('.html'));
-          if(html.length!==1381) throw new Error(`html-count:${html.length}`);
+          if(html.length!==2005) throw new Error(`html-count:${html.length}`);
           const broken=[];
           const attr=/\b(?:href|src)\s*=\s*["']([^"']+)["']/gi;
           for(const file of html){
@@ -104,14 +115,15 @@ jobs:
             console.error(broken.slice(0,50).join('\n'));
             throw new Error(`broken-local-references:${broken.length}`);
           }
-          console.log(`validated ${html.length} HTML routes and local references`);
+          console.log(`validated ${html.length} HTML files and local references`);
           NODE
 
       - name: Exercise public runtime and closed-sensitive defaults
+        if: env.ELA_IMPORT_PENDING != 'true'
         shell: bash
         run: |
           set -euo pipefail
-          expected_source_sha="a422481365008549d509c6945c30b987934622f9bad5a14c56c941ea776a5d29"
+          expected_source_sha="114ff2fee0d8709175a55cab31ac407d48b12525c855fd26b45d0a3e15c25923"
           PORT=8787 node server.js > "$RUNNER_TEMP/server.log" 2>&1 &
           pid=$!
           trap 'kill $pid 2>/dev/null || true' EXIT
@@ -128,20 +140,20 @@ jobs:
             sleep 1
           done
           test "$ready" = true
-          node -e "const h=require(process.env.RUNNER_TEMP+'/health.json');if(!h.ok||h.app!=='Estate Law Aid'||h.version!=='1.1.89'||h.canonicalDomain!=='https://estatelawaid.com'||h.sourceArtifactSha256!=='$expected_source_sha'||h.publicStaticLive!==true||h.sensitiveTrafficApproved!==false||h.liveClaims!==false||h.liveBilling!==false||h.liveUploads!==false||h.externalAi!==false)process.exit(1)"
+          node -e "const h=require(process.env.RUNNER_TEMP+'/health.json');if(!h.ok||h.app!=='Estate Law Aid'||h.version!=='1.3.4'||h.canonicalDomain!=='https://estatelawaid.com'||h.sourceArtifactSha256!=='$expected_source_sha'||h.publicStaticLive!==true||h.sensitiveTrafficApproved!==false||h.liveClaims!==false||h.liveBilling!==false||h.liveUploads!==false||h.externalAi!==false)process.exit(1)"
 
           curl -fsS http://127.0.0.1:8787/livez > "$RUNNER_TEMP/livez.json"
-          node -e "const h=require(process.env.RUNNER_TEMP+'/livez.json');if(!h.ok||h.status!=='alive'||h.app!=='Estate Law Aid'||h.version!=='1.1.89')process.exit(1)"
+          node -e "const h=require(process.env.RUNNER_TEMP+'/livez.json');if(!h.ok||h.status!=='alive'||h.app!=='Estate Law Aid'||h.version!=='1.3.4')process.exit(1)"
 
           curl -fsS http://127.0.0.1:8787/ > "$RUNNER_TEMP/home.html"
           grep -qi "Estate Law Aid" "$RUNNER_TEMP/home.html"
 
           curl -fsS http://127.0.0.1:8787/find-a-professional/ > "$RUNNER_TEMP/professionals.html"
-          grep -q "968 profiles" "$RUNNER_TEMP/professionals.html"
+          grep -q "1,267 profiles" "$RUNNER_TEMP/professionals.html"
 
           api_status="$(curl -sS -o "$RUNNER_TEMP/api.json" -w '%{http_code}' http://127.0.0.1:8787/api/ai/estate-intake-readiness)"
           test "$api_status" = "503"
-          node -e "const h=require(process.env.RUNNER_TEMP+'/api.json');if(h.ok!==false||h.state!=='closed_by_design'||h.version!=='1.1.89')process.exit(1)"
+          node -e "const h=require(process.env.RUNNER_TEMP+'/api.json');if(h.ok!==false||h.state!=='closed_by_design'||h.version!=='1.3.4')process.exit(1)"
 
           method_status="$(curl -sS -X POST -o "$RUNNER_TEMP/method.json" -w '%{http_code}' http://127.0.0.1:8787/)"
           test "$method_status" = "405"
@@ -159,11 +171,11 @@ jobs:
           test "$traversal_status" = "404"
 
       - name: Publish exact qualification ref
-        if: github.ref == 'refs/heads/main'
+        if: env.ELA_IMPORT_PENDING != 'true' && github.ref == 'refs/heads/main'
         shell: bash
         run: |
           set -euo pipefail
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          qualified_ref="qualified/v1.1.89/${GITHUB_SHA}"
+          qualified_ref="qualified/v1.3.4/${GITHUB_SHA}"
           git push origin "HEAD:refs/heads/${qualified_ref}"
