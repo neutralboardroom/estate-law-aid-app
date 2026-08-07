@@ -1,0 +1,6 @@
+Estate Law Aid v1.3.4 production qualification trigger
+runtime_import_commit=65f99707b1d74746c39f9401ac717d8edcb3d533
+source_artifact=estate-law-aid-v1.3.4.zip
+source_sha256=114ff2fee0d8709175a55cab31ac407d48b12525c855fd26b45d0a3e15c25923
+canonical_origin=https://estatelawaid.com
+runtime_content_unchanged=true
